@@ -1,0 +1,6953 @@
+```txt
+================================================================================
+GTPS.Host - API Documentation - Combined File
+================================================================================
+This file contains all API documentation from the following source files:
+
+1. Avatar.md
+2. AvatarPlayerAutofarm.md
+3. AvatarPlayerInventoryItem.md
+4. Callbacks.md
+5. DiscordBot.md
+6. DiscordButtonClickEvent.md
+7. DiscordFormSubmitEvent.md
+8. DiscordMessageCreateEvent.md
+9. DiscordSlashCommandEvent.md
+10. Drop.md
+11. Font.md
+12. Global Functions.md
+13. Guild.md
+14. IOTM.md
+15. Item.md
+16. RenderTexture.md
+17. ShopItem.md
+18. Sprite.md
+19. Tile.md
+20. World.md
+
+================================================================================
+FILE: GTPS.Host - Avatar.md
+================================================================================
+
+# Avatar Object API
+
+> Last updated: 2026-06-27
+
+---
+
+## Quick Navigation
+
+[A](#a) · [B](#b) · [C](#c) · [D](#d) · [E](#e) · [G](#g) · [H](#h) · [I](#i) · [L](#l) · [O](#o) · [P](#p) · [R](#r) · [S](#s) · [U](#u) · [V](#v)
+
+*207 methods across 15 letter groups.*
+
+---
+
+## A
+
+### `Avatar:addActiveTitle(title_id)`
+> Adds an active title to the avatar.
+
+```lua
+player:addActiveTitle(5)  -- Add title ID 5 as active
+```
+
+Avatar:addBankBalance(balance)
+
+Adds balance to the avatar's bank account.
+
+```lua
+player:addBankBalance(100)  -- Add 100 World Locks to bank
+```
+
+Avatar:addBlessing(blessingID)
+
+Adds a blessing to the avatar.
+
+```lua
+player:addBlessing(1)  -- Add blessing ID 1
+```
+
+Avatar:addCoins(coins)
+
+Adds coins to the avatar.
+
+```lua
+player:addCoins(1000)  -- Add 1000 coins
+```
+
+Avatar:addFriend(second_player)
+
+Adds a friend to the avatar's friend list (bidirectional).
+
+```lua
+local target = getPlayer(123)
+player:addFriend(target)  -- Add target as friend
+```
+
+Avatar:addGems(gems, instantSet, progressQuests)
+
+Adds gems to the avatar and updates the display.
+
+```lua
+player:addGems(500, 1, 1)  -- Add 500 gems, instant update, progress quests
+```
+
+Avatar:addGrowpassPoints(points)
+
+Adds Growpass points to the avatar.
+
+```lua
+player:addGrowpassPoints(100)  -- Add 100 Growpass points
+```
+
+Avatar:addLevel(level)
+
+Adds levels to the avatar.
+
+```lua
+player:addLevel(5)  -- Add 5 levels
+```
+
+Avatar:addMail()
+
+Adds mail to the avatar's mailbox.
+
+```lua
+player:addMail({
+    sender = "System",
+    subject = "Welcome!",
+    content = "Hello and welcome to the server!"
+})
+```
+
+Avatar:addMod(modID, value)
+
+Adds a mod to the avatar.
+
+```lua
+player:addMod(-77, 60)  -- Add Vanish mod for 60 seconds
+```
+
+Avatar:addNote(note)
+
+Adds a staff note to the avatar's account.
+
+```lua
+player:addNote("Suspicious activity detected")
+```
+
+Avatar:addPlaytime(time)
+
+Adds playtime to the avatar.
+
+```lua
+player:addPlaytime(3600)  -- Add 1 hour of playtime
+```
+
+Avatar:addSubscription(Type, exp)
+
+Adds a subscription to the avatar.
+
+```lua
+player:addSubscription(1, os.time() + 86400)  -- Add Super Supporter for 1 day
+```
+
+Avatar:addTitle(title_id)
+
+Adds a title to the avatar's collection.
+
+```lua
+player:addTitle(10)  -- Add title ID 10
+```
+
+Avatar:adjustBlockHitCount(adjust)
+
+Adjusts the block hit count for the avatar (-10 to +10).
+
+```lua
+player:adjustBlockHitCount(-10)  -- All blocks break in 1 hit
+```
+
+---
+
+B
+
+Avatar:ban(modDuration, reason, punishedBy, banDevice, banIP)
+
+Bans the avatar from the server.
+
+```lua
+player:ban(86400, "Hacking", "Admin", 1, 1)  -- Ban for 24 hours
+```
+
+---
+
+C
+
+Avatar:canFit()
+
+Checks whether the avatar can fit into a world.
+
+```lua
+if player:canFit() then
+    print("Player can fit in the world")
+end
+```
+
+Avatar:changeItem(itemID, itemCount, addBackpack)
+
+Changes the item amount for the avatar.
+
+```lua
+player:changeItem(242, 10, 0)   -- Add 10 World Locks to inventory
+player:changeItem(242, -5, 1)   -- Remove 5 World Locks from backpack
+```
+
+Avatar:checkPassword(password)
+
+Checks if the provided password matches the avatar's password.
+
+```lua
+if player:checkPassword("myPassword123") then
+    print("Password correct!")
+end
+```
+
+Avatar:clearMailbox()
+
+Clears all mail from the avatar's mailbox.
+
+```lua
+player:clearMailbox()  -- Delete all mail
+```
+
+---
+
+D
+
+Avatar:deleteEffects()
+
+Deletes all effects from the avatar.
+
+```lua
+player:deleteEffects()  -- Remove all effects
+```
+
+Avatar:disconnect()
+
+Disconnects the avatar from the server.
+
+```lua
+player:disconnect()  -- Force disconnect player
+```
+
+Avatar:doAction(str)
+
+Sends an action on behalf of the avatar.
+
+```lua
+player:doAction("action|play_sfx\nfile|audio/coin.wav\ndelayMS|0")
+```
+
+Avatar:doRawPacket(data)
+
+Sends a raw packet on behalf of the avatar.
+
+```lua
+player:doRawPacket("action|input\n|text|Hello")
+```
+
+---
+
+E
+
+Avatar:earnAchievement(type)
+
+Awards an achievement to the avatar.
+
+```lua
+player:earnAchievement(250)  -- Earn achievement ID 250
+```
+
+Avatar:enterWorld(worldName, notification, optional - bypass)
+
+Moves the avatar to another world.
+
+```lua
+player:enterWorld("START", "Teleporting...", 0)  -- Enter world START
+```
+
+---
+
+G
+
+Avatar:getAccessWorlds()
+
+Returns the worlds the avatar has access to.
+
+```lua
+local worlds = player:getAccessWorlds()
+for _, worldID in ipairs(worlds) do
+    print("Access to world:", worldID)
+end
+```
+
+Avatar:getAccountCreationDateStr()
+
+Returns the account creation date as a formatted string.
+
+```lua
+local date = player:getAccountCreationDateStr()
+print("Account created:", date)
+```
+
+Avatar:getAccountCreationTime()
+
+Returns the account creation time as a UNIX timestamp.
+
+```lua
+local time = player:getAccountCreationTime()
+print("Created at:", os.date("%Y-%m-%d", time))
+```
+
+Avatar:getAchievements()
+
+Returns the achievements earned by the avatar.
+
+```lua
+local achievements = player:getAchievements()
+for _, ach in ipairs(achievements) do
+    print(ach.id, ach.name, ach.timestamp)
+end
+```
+
+Avatar:getActivePet()
+
+Returns the active pet of the avatar.
+
+```lua
+local pet = player:getActivePet()
+if pet then
+    print("Active pet:", pet)
+end
+```
+
+Avatar:getActiveTitles()
+
+Returns the active titles of the avatar.
+
+```lua
+local titles = player:getActiveTitles()
+for _, title in ipairs(titles) do
+    print("Active title:", title)
+end
+```
+
+Avatar:getAdjustedBlockHitCount()
+
+Returns the adjusted block hit count.
+
+```lua
+local adjustment = player:getAdjustedBlockHitCount()
+print("Block hit adjustment:", adjustment)
+```
+
+Avatar:getAltAccounts()
+
+Returns the alt accounts of the avatar.
+
+```lua
+local alts = player:getAltAccounts()
+for _, alt in ipairs(alts) do
+    print("Alt account:", alt:getRealCleanName())
+end
+```
+
+Avatar:getAutofarm()
+
+Returns the autofarm object for the avatar.
+
+```lua
+local autofarm = player:getAutofarm()
+print("Autofarm active:", autofarm:isActive())
+```
+
+Avatar:getBackpackItems()
+
+Returns the backpack items of the avatar.
+
+```lua
+local items = player:getBackpackItems()
+for _, item in ipairs(items) do
+    print("Backpack item:", item.id, "x", item.amount)
+end
+```
+
+Avatar:getBackpackUsedSize()
+
+Returns the used backpack size.
+
+```lua
+local used = player:getBackpackUsedSize()
+print("Backpack used:", used)
+```
+
+Avatar:getBankBalance()
+
+Returns the bank balance of the avatar.
+
+```lua
+local balance = player:getBankBalance()
+print("Bank balance:", balance, "WL")
+```
+
+Avatar:getBiweeklyQuests()
+
+Returns the biweekly quests of the avatar.
+
+```lua
+local quests = player:getBiweeklyQuests()
+for _, quest in ipairs(quests) do
+    print("Quest:", quest.taskID, quest.taskCompletedValue)
+end
+```
+
+Avatar:getBlockPosX()
+
+Returns the block position X of the avatar.
+
+```lua
+local x = player:getBlockPosX()
+print("Block X:", x)
+```
+
+Avatar:getBlockPosY()
+
+Returns the block position Y of the avatar.
+
+```lua
+local y = player:getBlockPosY()
+print("Block Y:", y)
+```
+
+Avatar:getCardBattleInfo()
+
+Returns the card battle info of the avatar.
+
+```lua
+local info = player:getCardBattleInfo()
+print("Card battle info:", info)
+```
+
+Avatar:getClassicProfileContent(catType, flags)
+
+Returns the classic profile content of the avatar.
+
+```lua
+local content = player:getClassicProfileContent(0, 0)
+print("Profile content:", content)
+```
+
+Avatar:getCleanName()
+
+Returns the clean name (no formatting) of the avatar.
+
+```lua
+local name = player:getCleanName()
+print("Clean name:", name)
+```
+
+Avatar:getClothingItemID(index)
+
+Returns the clothing item ID at the specified slot.
+
+```lua
+local hat = player:getClothingItemID(0)  -- Get hat slot
+print("Hat item ID:", hat)
+```
+
+Avatar:getCoins()
+
+Returns the coins of the avatar.
+
+```lua
+local coins = player:getCoins()
+print("Coins:", coins)
+```
+
+Avatar:getCountry()
+
+Returns the country code of the avatar.
+
+```lua
+local country = player:getCountry()
+print("Country:", country)
+```
+
+Avatar:getCountryFlagBackground()
+
+Returns the country flag background item ID.
+
+```lua
+local bg = player:getCountryFlagBackground()
+print("Flag background:", bg)
+```
+
+Avatar:getCountryFlagForeground()
+
+Returns the country flag foreground item ID.
+
+```lua
+local fg = player:getCountryFlagForeground()
+print("Flag foreground:", fg)
+```
+
+Avatar:getDiscordID()
+
+Returns the Discord ID linked to the avatar.
+
+```lua
+local discordID = player:getDiscordID()
+print("Discord ID:", discordID)
+```
+
+Avatar:getDiscordInvites()
+
+Returns the Discord invites count.
+
+```lua
+local invites = player:getDiscordInvites()
+print("Discord invites:", invites)
+```
+
+Avatar:getDungeonScrolls()
+
+Returns the dungeon scrolls count.
+
+```lua
+local scrolls = player:getDungeonScrolls()
+print("Dungeon scrolls:", scrolls)
+```
+
+Avatar:getEffects()
+
+Returns the effects of the avatar.
+
+```lua
+local effects = player:getEffects()
+print("Effects:", effects)
+```
+
+Avatar:getEmail()
+
+Returns the email of the avatar.
+
+```lua
+local email = player:getEmail()
+print("Email:", email)
+```
+
+Avatar:getFriends()
+
+Returns the friend list of the avatar.
+
+```lua
+local friends = player:getFriends()
+for _, friendID in ipairs(friends) do
+    print("Friend UID:", friendID)
+end
+```
+
+Avatar:getGameVersion()
+
+Returns the game version of the avatar.
+
+```lua
+local version = player:getGameVersion()
+print("Game version:", version)
+```
+
+Avatar:getGems()
+
+Returns the gems of the avatar.
+
+```lua
+local gems = player:getGems()
+print("Gems:", gems)
+```
+
+Avatar:getGender()
+
+Returns the gender of the avatar (0=Male, 1=Female).
+
+```lua
+local gender = player:getGender()
+print("Gender:", gender == 0 and "Male" or "Female")
+```
+
+Avatar:getGrowpassPoints()
+
+Returns the Growpass points of the avatar.
+
+```lua
+local points = player:getGrowpassPoints()
+print("Growpass points:", points)
+```
+
+Avatar:getGuildID()
+
+Returns the guild ID of the avatar.
+
+```lua
+local guildID = player:getGuildID()
+print("Guild ID:", guildID)
+```
+
+Avatar:getHomeWorldID()
+
+Returns the home world ID of the avatar.
+
+```lua
+local home = player:getHomeWorldID()
+print("Home world ID:", home)
+```
+
+Avatar:getInventoryItems()
+
+Returns the inventory items of the avatar.
+
+```lua
+local items = player:getInventoryItems()
+for _, item in ipairs(items) do
+    print("Item:", item:getItemID(), "x", item:getItemCount())
+end
+```
+
+Avatar:getInventorySize()
+
+Returns the inventory size of the avatar.
+
+```lua
+local size = player:getInventorySize()
+print("Inventory size:", size)
+```
+
+Avatar:getIP()
+
+Returns the IP address of the avatar.
+
+```lua
+local ip = player:getIP()
+print("IP:", ip)
+```
+
+Avatar:getIPHistory()
+
+Returns the IP history of the avatar.
+
+```lua
+local history = player:getIPHistory()
+for _, ip in ipairs(history) do
+    print("IP:", ip)
+end
+```
+
+Avatar:getItemAmount(itemID)
+
+Returns the amount of a specific item in the inventory.
+
+```lua
+local wl = player:getItemAmount(242)
+print("World Locks:", wl)
+```
+
+Avatar:getItemAmountBackpack(itemID)
+
+Returns the amount of a specific item in the backpack.
+
+```lua
+local wl = player:getItemAmountBackpack(242)
+print("World Locks in backpack:", wl)
+```
+
+Avatar:getItemEffects()
+
+Returns the combined item effects from clothing.
+
+```lua
+local effects = player:getItemEffects()
+print("Extra gems:", effects.extra_gems)
+print("Extra XP:", effects.extra_xp)
+print("One-hit:", effects.one_hit)
+```
+
+Avatar:getLastOnline()
+
+Returns the last online time of the avatar.
+
+```lua
+local last = player:getLastOnline()
+print("Last online:", os.date("%Y-%m-%d %H:%M:%S", last))
+```
+
+Avatar:getLevel()
+
+Returns the level of the avatar.
+
+```lua
+local level = player:getLevel()
+print("Level:", level)
+```
+
+Avatar:getLifeGoals()
+
+Returns the life goals of the avatar.
+
+```lua
+local goals = player:getLifeGoals()
+for _, goal in ipairs(goals) do
+    print("Goal:", goal.taskID)
+end
+```
+
+Avatar:getMiddlePosX()
+
+Returns the middle position X of the avatar.
+
+```lua
+local x = player:getMiddlePosX()
+print("Middle X:", x)
+```
+
+Avatar:getMiddlePosY()
+
+Returns the middle position Y of the avatar.
+
+```lua
+local y = player:getMiddlePosY()
+print("Middle Y:", y)
+```
+
+Avatar:getMod(modID)
+
+Returns the mod of the avatar.
+
+```lua
+local mod = player:getMod(-77)
+print("Vanish mod:", mod)
+```
+
+Avatar:getMods()
+
+Returns all mods of the avatar.
+
+```lua
+local mods = player:getMods()
+for _, mod in ipairs(mods) do
+    print("Mod:", mod)
+end
+```
+
+Avatar:getName()
+
+Returns the name (with formatting) of the avatar.
+
+```lua
+local name = player:getName()
+print("Display name:", name)
+```
+
+Avatar:getNetID()
+
+Returns the network ID of the avatar.
+
+```lua
+local netID = player:getNetID()
+print("Net ID:", netID)
+```
+
+Avatar:getOnlineStatus()
+
+Returns the online status of the avatar.
+
+```lua
+local status = player:getOnlineStatus()
+print("Online status:", status)
+```
+
+Avatar:getOwnedWorlds()
+
+Returns the worlds owned by the avatar.
+
+```lua
+local worlds = player:getOwnedWorlds()
+for _, worldID in ipairs(worlds) do
+    print("Owned world:", worldID)
+end
+```
+
+Avatar:getOwnerRole()
+
+Returns the owner role of the avatar.
+
+```lua
+local role = player:getOwnerRole()
+print("Owner role:", role)
+```
+
+Avatar:getPing()
+
+Returns the ping of the avatar.
+
+```lua
+local ping = player:getPing()
+print("Ping:", ping, "ms")
+```
+
+Avatar:getPlatform()
+
+Returns the platform of the avatar.
+
+```lua
+local platform = player:getPlatform()
+print("Platform:", platform)
+```
+
+Avatar:getPlaytime()
+
+Returns the playtime of the avatar.
+
+```lua
+local playtime = player:getPlaytime()
+print("Playtime:", playtime, "seconds")
+```
+
+Avatar:getPosX()
+
+Returns the position X of the avatar.
+
+```lua
+local x = player:getPosX()
+print("X position:", x)
+```
+
+Avatar:getPosY()
+
+Returns the position Y of the avatar.
+
+```lua
+local y = player:getPosY()
+print("Y position:", y)
+```
+
+Avatar:getProfileAccessButton()
+
+Returns the profile access button.
+
+```lua
+local button = player:getProfileAccessButton()
+print("Profile access button:", button)
+```
+
+Avatar:getProfileGuildInfo()
+
+Returns the profile guild info.
+
+```lua
+local info = player:getProfileGuildInfo()
+print("Profile guild info:", info)
+```
+
+Avatar:getProfileGuildJoinButton()
+
+Returns the profile guild join button.
+
+```lua
+local button = player:getProfileGuildJoinButton()
+print("Profile guild join button:", button)
+```
+
+Avatar:getRealCleanName()
+
+Returns the real clean name (no formatting, no nick) of the avatar.
+
+```lua
+local realName = player:getRealCleanName()
+print("Real clean name:", realName)
+```
+
+Avatar:getRealName()
+
+Returns the real name (no nick) of the avatar.
+
+```lua
+local realName = player:getRealName()
+print("Real name:", realName)
+```
+
+Avatar:getRecentWorlds()
+
+Returns the recent worlds visited by the avatar.
+
+```lua
+local worlds = player:getRecentWorlds()
+for _, worldID in ipairs(worlds) do
+    print("Recent world:", worldID)
+end
+```
+
+Avatar:getRequiredXP()
+
+Returns the required XP for the next level.
+
+```lua
+local xp = player:getRequiredXP()
+print("Required XP:", xp)
+```
+
+Avatar:getRID()
+
+Returns the RID of the avatar.
+
+```lua
+local rid = player:getRID()
+print("RID:", rid)
+```
+
+Avatar:getRIDHistory()
+
+Returns the RID history of the avatar.
+
+```lua
+local history = player:getRIDHistory()
+for _, rid in ipairs(history) do
+    print("RID:", rid)
+end
+```
+
+Avatar:getRole()
+
+Returns the role of the avatar.
+
+```lua
+local role = player:getRole()
+print("Role:", role.roleName)
+```
+
+Avatar:getRoleQuestLevel(type)
+
+Returns the role quest level of the avatar.
+
+```lua
+local level = player:getRoleQuestLevel(0)
+print("Role quest level:", level)
+```
+
+Avatar:getSmallLockedWorlds()
+
+Returns the small locked worlds of the avatar.
+
+```lua
+local worlds = player:getSmallLockedWorlds()
+for _, worldID in ipairs(worlds) do
+    print("Small locked world:", worldID)
+end
+```
+
+Avatar:getStats(statType)
+
+Returns a specific stat of the avatar.
+
+```lua
+local surgeries = player:getStats(21)  -- Surgery stat
+print("Surgeries:", surgeries)
+```
+
+Avatar:getSubscription(subType)
+
+Returns the subscription of the avatar.
+
+```lua
+local sub = player:getSubscription(1)  -- Super Supporter
+if sub then
+    print("Expires:", sub:getExpireTime())
+end
+```
+
+Avatar:getSubscriptionInfo()
+
+Returns the subscription info of the avatar.
+
+```lua
+local info = player:getSubscriptionInfo()
+print("Subscription info:", info)
+```
+
+Avatar:getTitles()
+
+Returns all titles of the avatar.
+
+```lua
+local titles = player:getTitles()
+for _, title in ipairs(titles) do
+    print("Title:", title.titleName)
+end
+```
+
+Avatar:getTotalWorldLocks()
+
+Returns the total world locks of the avatar.
+
+```lua
+local total = player:getTotalWorldLocks()
+print("Total world locks:", total)
+```
+
+Avatar:getTransformProfileButtons()
+
+Returns the transform profile buttons.
+
+```lua
+local buttons = player:getTransformProfileButtons()
+print("Transform profile buttons:", buttons)
+```
+
+Avatar:getType()
+
+Returns the type of the avatar (0=player, 25=Lua NPC).
+
+```lua
+local type = player:getType()
+print("Type:", type)
+```
+
+Avatar:getUnlockedAchievementsCount()
+
+Returns the unlocked achievements count.
+
+```lua
+local count = player:getUnlockedAchievementsCount()
+print("Unlocked achievements:", count)
+```
+
+Avatar:getUserID()
+
+Returns the user ID of the avatar.
+
+```lua
+local uid = player:getUserID()
+print("User ID:", uid)
+```
+
+Avatar:getWorld()
+
+Returns the world object of the avatar.
+
+```lua
+local world = player:getWorld()
+if world then
+    print("Current world:", world:getName())
+end
+```
+
+Avatar:getWorldName()
+
+Returns the world name of the avatar.
+
+```lua
+local worldName = player:getWorldName()
+print("World name:", worldName)
+```
+
+Avatar:getXP()
+
+Returns the XP of the avatar.
+
+```lua
+local xp = player:getXP()
+print("XP:", xp)
+```
+
+---
+
+H
+
+Avatar:hasActiveBlessing(blessingID)
+
+Checks whether the avatar has an active blessing.
+
+```lua
+if player:hasActiveBlessing(1) then
+    print("Blessing is active!")
+end
+```
+
+Avatar:hasBlessing(blessingID)
+
+Checks whether the avatar has a blessing.
+
+```lua
+if player:hasBlessing(1) then
+    print("Has blessing!")
+end
+```
+
+Avatar:hasGrowID()
+
+Checks whether the avatar has a GrowID.
+
+```lua
+if player:hasGrowID() then
+    print("Has GrowID!")
+end
+```
+
+Avatar:hasMod(modID)
+
+Checks whether the avatar has a specific mod.
+
+```lua
+if player:hasMod(-77) then
+    print("Player is vanished!")
+end
+```
+
+Avatar:hasRole(roleID)
+
+Checks whether the avatar has a specific role.
+
+```lua
+if player:hasRole(11) then
+    print("Player is Staff!")
+end
+```
+
+Avatar:hasTitle(title_id)
+
+Checks whether the avatar has a specific title.
+
+```lua
+if player:hasTitle(10) then
+    print("Has title ID 10!")
+end
+```
+
+---
+
+I
+
+Avatar:isFacingLeft()
+
+Checks whether the avatar is facing left.
+
+```lua
+if player:isFacingLeft() then
+    print("Facing left!")
+end
+```
+
+Avatar:isMaxInventorySpace()
+
+Checks whether the avatar has max inventory space.
+
+```lua
+if player:isMaxInventorySpace() then
+    print("Max inventory space!")
+end
+```
+
+Avatar:isOnline()
+
+Checks whether the avatar is online.
+
+```lua
+if player:isOnline() then
+    print("Player is online!")
+end
+```
+
+---
+
+L
+
+Avatar:leaveWorld()
+
+Makes the avatar leave the current world.
+
+```lua
+player:leaveWorld()  -- Exit current world
+```
+
+---
+
+O
+
+Avatar:onAchievementsUI(optional - targetPlayer)
+
+Opens the achievements UI for the avatar.
+
+```lua
+player:onAchievementsUI()  -- Open own achievements
+player:onAchievementsUI(targetPlayer)  -- Open target's achievements
+```
+
+Avatar:onAddNotification(texture, message, audio, num, optional - delay)
+
+Sends a notification to the avatar.
+
+```lua
+player:onAddNotification("interface/atomic_button.rttex", "Hello!", "audio/hub_open.wav", 0)
+```
+
+Avatar:onBackpackUI(optional - targetPlayer)
+
+Opens the backpack UI for the avatar.
+
+```lua
+player:onBackpackUI()  -- Open own backpack
+```
+
+Avatar:onBillboardUI()
+
+Opens the billboard UI.
+
+```lua
+player:onBillboardUI()
+```
+
+Avatar:onClothesUI(optional - targetPlayer)
+
+Opens the clothes UI for the avatar.
+
+```lua
+player:onClothesUI(targetPlayer)
+```
+
+Avatar:onConsoleMessage(message, optional - delay)
+
+Sends a console message to the avatar.
+
+```lua
+player:onConsoleMessage("`2Welcome to the server!")
+```
+
+Avatar:onDialogRequest(message, optional - delay)
+
+Sends a dialog request to the avatar.
+
+```lua
+local dialog = "set_default_color|`o\nadd_label|big|Hello!|left|\nend_dialog|hello|||"
+player:onDialogRequest(dialog)
+```
+
+Avatar:onFavItemsUI()
+
+Opens the favorite items UI.
+
+```lua
+player:onFavItemsUI()
+```
+
+Avatar:onGrow4GoodDonate()
+
+Opens the Grow4Good donate UI.
+
+```lua
+player:onGrow4GoodDonate()
+```
+
+Avatar:onGrow4GoodUI()
+
+Opens the Grow4Good UI.
+
+```lua
+player:onGrow4GoodUI()
+```
+
+Avatar:onGrowmojiUI()
+
+Opens the Growmoji UI.
+
+```lua
+player:onGrowmojiUI()
+```
+
+Avatar:onGrowpassUI()
+
+Opens the Growpass UI.
+
+```lua
+player:onGrowpassUI()
+```
+
+Avatar:onGuildNotebookUI()
+
+Opens the guild notebook UI.
+
+```lua
+player:onGuildNotebookUI()
+```
+
+Avatar:onLinkDiscordUI()
+
+Opens the link Discord UI.
+
+```lua
+player:onLinkDiscordUI()
+```
+
+Avatar:onMentorshipUI()
+
+Opens the mentorship UI.
+
+```lua
+player:onMentorshipUI()
+```
+
+Avatar:onNameIconsUI(optional - targetPlayer)
+
+Opens the name icons UI.
+
+```lua
+player:onNameIconsUI(targetPlayer)
+```
+
+Avatar:onNotebookUI()
+
+Opens the notebook UI.
+
+```lua
+player:onNotebookUI()
+```
+
+Avatar:onOnlineStatusUI()
+
+Opens the online status UI.
+
+```lua
+player:onOnlineStatusUI()
+```
+
+Avatar:onParticleEffect(particleID, posX, posY, num, num2, optional - delay)
+
+Sends a particle effect to the avatar.
+
+```lua
+player:onParticleEffect(1, 100, 100, 1, 1)
+```
+
+Avatar:onPersonalizeWrenchUI()
+
+Opens the personalize wrench UI.
+
+```lua
+player:onPersonalizeWrenchUI()
+```
+
+Avatar:onProfileUI(world, tab)
+
+Opens the profile UI.
+
+```lua
+player:onProfileUI(player:getWorld(), 0)
+```
+
+Avatar:onRedeemMenu()
+
+Opens the redeem menu.
+
+```lua
+player:onRedeemMenu()
+```
+
+Avatar:onStorePurchaseResult()
+
+Opens the store purchase result UI.
+
+```lua
+player:onStorePurchaseResult()
+```
+
+Avatar:onStoreRequest(message, optional - delay)
+
+Sends a store request to the avatar.
+
+```lua
+player:onStoreRequest("store_data")
+```
+
+Avatar:onTalkBubble(netID, message, persistMessage, optional - delay)
+
+Sends a talk bubble to the avatar.
+
+```lua
+player:onTalkBubble(player:getNetID(), "Hello!", 0)
+```
+
+Avatar:onTextOverlay(message, optional - delay)
+
+Sends a text overlay to the avatar.
+
+```lua
+player:onTextOverlay("`2Welcome!")
+```
+
+Avatar:onTitlesUI(optional - targetPlayer)
+
+Opens the titles UI.
+
+```lua
+player:onTitlesUI(targetPlayer)
+```
+
+Avatar:onTradeHistoryUI(optional - targetPlayer)
+
+Opens the trade history UI.
+
+```lua
+player:onTradeHistoryUI()  -- Own trade history
+```
+
+Avatar:onTradeScanUI()
+
+Opens the trade scan UI.
+
+```lua
+player:onTradeScanUI()
+```
+
+Avatar:onUnlinkDiscordUI()
+
+Opens the unlink Discord UI.
+
+```lua
+player:onUnlinkDiscordUI()
+```
+
+Avatar:onVouchersUI()
+
+Opens the vouchers UI.
+
+```lua
+player:onVouchersUI()
+```
+
+Avatar:onWrenchIconsUI(optional - targetPlayer)
+
+Opens the wrench icons UI.
+
+```lua
+player:onWrenchIconsUI(targetPlayer)
+```
+
+---
+
+P
+
+Avatar:placeBlock(x, y, itemID)
+
+Places a block at the specified position.
+
+```lua
+player:placeBlock(10, 10, 2)  -- Place dirt at (10,10)
+```
+
+Avatar:playAudio(message)
+
+Plays audio for the avatar.
+
+```lua
+player:playAudio("audio/hub_open.wav")
+```
+
+Avatar:punchBlock(x, y)
+
+Punches a block at the specified position.
+
+```lua
+player:punchBlock(10, 10)  -- Punch block at (10,10)
+```
+
+---
+
+R
+
+Avatar:removeActiveTitle(title_id)
+
+Removes an active title from the avatar.
+
+```lua
+player:removeActiveTitle(5)
+```
+
+Avatar:removeBankBalance(balance)
+
+Removes balance from the avatar's bank account.
+
+```lua
+player:removeBankBalance(50)  -- Remove 50 WL from bank
+```
+
+Avatar:removeBlessing(blessingID)
+
+Removes a blessing from the avatar.
+
+```lua
+player:removeBlessing(1)
+```
+
+Avatar:removeCoins(coins, progressQuests)
+
+Removes coins from the avatar.
+
+```lua
+player:removeCoins(100, 1)
+```
+
+Avatar:removeFriend(second_player)
+
+Removes a friend from the avatar's friend list.
+
+```lua
+player:removeFriend(targetPlayer)
+```
+
+Avatar:removeGems(gems, instantSet, progressQuests)
+
+Removes gems from the avatar.
+
+```lua
+player:removeGems(100, 1, 1)
+```
+
+Avatar:removeInventorySpace(size)
+
+Removes inventory space from the avatar.
+
+```lua
+player:removeInventorySpace(10)
+```
+
+Avatar:removeLevel(level)
+
+Removes levels from the avatar.
+
+```lua
+player:removeLevel(5)
+```
+
+Avatar:removeMod(modID)
+
+Removes a mod from the avatar.
+
+```lua
+player:removeMod(-77)  -- Remove vanish mod
+```
+
+Avatar:removeSubscription(type)
+
+Removes a subscription from the avatar.
+
+```lua
+player:removeSubscription(1)
+```
+
+Avatar:removeTitle(title_id)
+
+Removes a title from the avatar.
+
+```lua
+player:removeTitle(10)
+```
+
+Avatar:removeXP(xp)
+
+Removes XP from the avatar.
+
+```lua
+player:removeXP(1000)
+```
+
+Avatar:resetDialogColor()
+
+Resets the dialog color to default.
+
+```lua
+player:resetDialogColor()
+```
+
+Avatar:resetNickname()
+
+Resets the avatar's nickname to the real name.
+
+```lua
+player:resetNickname()
+```
+
+---
+
+S
+
+Avatar:sendAction(action_str)
+
+Sends an action to the avatar.
+
+```lua
+player:sendAction("action|play_sfx\nfile|audio/coin.wav")
+```
+
+Avatar:sendRawPacket(data)
+
+Sends a raw packet to the avatar.
+
+```lua
+player:sendRawPacket("action|input\n|text|Hello")
+```
+
+Avatar:sendVariant(variantList)
+
+Sends a variant list packet to the avatar.
+
+```lua
+player:sendVariant({"OnConsoleMessage", "Hello!", 0, -1})
+```
+
+Avatar:setAAPEnabled(aapEnabled)
+
+Sets the AAP (Advanced Account Protection) enabled state.
+
+```lua
+player:setAAPEnabled(1)  -- Enable AAP
+```
+
+Avatar:setAccountCreationTime(time)
+
+Sets the account creation time of the avatar.
+
+```lua
+player:setAccountCreationTime(os.time() - 86400)  -- Set to 1 day ago
+```
+
+Avatar:setBankBalance(balance)
+
+Sets the bank balance of the avatar.
+
+```lua
+player:setBankBalance(1000)  -- Set bank balance to 1000 WL
+```
+
+Avatar:setBroadcastWorld(worldName)
+
+Sets the broadcast world for the avatar.
+
+```lua
+player:setBroadcastWorld("START")
+```
+
+Avatar:setClothes(slot, itemID)
+
+Sets a clothing item for the avatar.
+
+```lua
+player:setClothes(0, 1000)  -- Set hat slot to item 1000
+```
+
+Avatar:setClothesColor(slot, color)
+
+Sets the color of a clothing slot.
+
+```lua
+player:setClothesColor(0, "FF0000")  -- Set hat color to red
+```
+
+Avatar:setCoins(coins)
+
+Sets the coins of the avatar.
+
+```lua
+player:setCoins(500)
+```
+
+Avatar:setCountry(country)
+
+Sets the country of the avatar.
+
+```lua
+player:setCountry("US")  -- Set country to United States
+```
+
+Avatar:setCountryFlagBackground(item_id)
+
+Sets the country flag background.
+
+```lua
+player:setCountryFlagBackground(1000)
+```
+
+Avatar:setCountryFlagForeground(item_id)
+
+Sets the country flag foreground.
+
+```lua
+player:setCountryFlagForeground(1001)
+```
+
+Avatar:setCustomAutofarmDelay(delay)
+
+Sets the custom autofarm delay for the avatar.
+
+```lua
+player:setCustomAutofarmDelay(500)  -- Set to 500ms
+```
+
+Avatar:setDungeonScrolls(scrolls)
+
+Sets the dungeon scrolls count.
+
+```lua
+player:setDungeonScrolls(10)
+```
+
+Avatar:setEffects()
+
+Sets the effects for the avatar.
+
+```lua
+player:setEffects({extra_gems = 10, extra_xp = 5})
+```
+
+Avatar:setEmail(email)
+
+Sets the email of the avatar.
+
+```lua
+player:setEmail("player@example.com")
+```
+
+Avatar:setGender(gender)
+
+Sets the gender of the avatar.
+
+```lua
+player:setGender(0)  -- Set to Male
+```
+
+Avatar:setGems(gems, instantSet)
+
+Sets the gems of the avatar.
+
+```lua
+player:setGems(1000, 1)  -- Set to 1000 gems, instant update
+```
+
+Avatar:setGodMode(enabled)
+
+Sets the god mode for the avatar.
+
+```lua
+player:setGodMode(true)  -- Enable god mode
+```
+
+Avatar:setGrowpassPoints(points)
+
+Sets the Growpass points of the avatar.
+
+```lua
+player:setGrowpassPoints(500)
+```
+
+Avatar:setGuildName(name)
+
+Sets the guild name for the avatar.
+
+```lua
+player:setGuildName("My Guild")
+```
+
+Avatar:setInventorySpace(newSize)
+
+Sets the inventory space of the avatar.
+
+```lua
+player:setInventorySpace(100)
+```
+
+Avatar:setLevel(level)
+
+Sets the level of the avatar.
+
+```lua
+player:setLevel(50)
+```
+
+Avatar:setNickname(nickname)
+
+Sets the nickname of the avatar.
+
+```lua
+player:setNickname("`6@CoolPlayer")
+```
+
+Avatar:setNextDialogBorderRGBA(R, G, B, A)
+
+Sets the next dialog border color.
+
+```lua
+player:setNextDialogBorderRGBA(255, 0, 0, 255)  -- Red border
+```
+
+Avatar:setNextDialogRGBA(R, G, B, A)
+
+Sets the next dialog background color.
+
+```lua
+player:setNextDialogRGBA(0, 0, 255, 255)  -- Blue background
+```
+
+Avatar:setOwnerRole(roleID)
+
+Sets the owner role of the avatar.
+
+```lua
+player:setOwnerRole(11)
+```
+
+Avatar:setPassword(tankIDPass)
+
+Sets the password of the avatar.
+
+```lua
+player:setPassword("newPassword123")
+```
+
+Avatar:setPlaytime(time)
+
+Sets the playtime of the avatar.
+
+```lua
+player:setPlaytime(3600)  -- Set to 1 hour
+```
+
+Avatar:setRole(roleID)
+
+Sets the role of the avatar.
+
+```lua
+player:setRole(11)  -- Set to Staff role
+```
+
+Avatar:setRoleQuestLevel(type, newLevel)
+
+Sets the role quest level of the avatar.
+
+```lua
+player:setRoleQuestLevel(0, 5)
+```
+
+Avatar:setStats(statType, statNumber)
+
+Sets a specific stat of the avatar.
+
+```lua
+player:setStats(21, 100)  -- Set surgeries to 100
+```
+
+Avatar:setXP(xp)
+
+Sets the XP of the avatar.
+
+```lua
+player:setXP(5000)
+```
+
+---
+
+U
+
+Avatar:upgradeInventorySpace(size)
+
+Upgrades the inventory space of the avatar.
+
+```lua
+player:upgradeInventorySpace(20)  -- Add 20 slots
+```
+
+Avatar:updateGems(instantSet)
+
+Updates the gems display for the avatar.
+
+```lua
+player:updateGems(1)  -- Instant update
+```
+
+Avatar:updateStats(world, type, optional - amount)
+
+Updates a stat for the avatar.
+
+```lua
+player:updateStats(world, 21, 1)  -- Increment surgeries
+```
+
+---
+
+V
+
+Avatar:visualBuild(tile)
+
+Performs a visual build animation for the avatar.
+
+```lua
+local tile = world:getTile(10, 10)
+player:visualBuild(tile)
+```
+
+Avatar:visualPunch(tile)
+
+Performs a visual punch animation for the avatar.
+
+```lua
+local tile = world:getTile(10, 10)
+player:visualPunch(tile)
+```
+
+================================================================================
+FILE: GTPS.Host - AvatarPlayerAutofarm.md
+================================================================================
+
+AvatarPlayerAutofarm Object API
+
+Last updated: 2026-06-27
+Obtained via player:getAutofarm(). Represents the avatar's autofarm session/config.
+
+---
+
+Quick Navigation
+
+G · I · S
+
+16 methods across 3 letter groups.
+
+---
+
+G
+
+AvatarPlayerAutofarm:getTargetBlockID()
+
+Returns the target block ID for this avatar player autofarm.
+
+```lua
+local targetBlockID = autofarm:getTargetBlockID()
+print("targetBlockID:", targetBlockID)
+```
+
+AvatarPlayerAutofarm:getNextPosX()
+
+Returns the next pos x for this avatar player autofarm.
+
+```lua
+local nextPosX = autofarm:getNextPosX()
+print("nextPosX:", nextPosX)
+```
+
+AvatarPlayerAutofarm:getNextPosY()
+
+Returns the next pos y for this avatar player autofarm.
+
+```lua
+local nextPosY = autofarm:getNextPosY()
+print("nextPosY:", nextPosY)
+```
+
+AvatarPlayerAutofarm:getDelay()
+
+Returns the delay for this avatar player autofarm.
+
+```lua
+local delay = autofarm:getDelay()
+print("delay:", delay)
+```
+
+AvatarPlayerAutofarm:getSlots()
+
+Returns the slots for this avatar player autofarm.
+
+```lua
+local slots = autofarm:getSlots()
+print("slots:", slots)
+```
+
+---
+
+I
+
+AvatarPlayerAutofarm:isActive()
+
+Checks whether this avatar player autofarm is active.
+
+```lua
+if autofarm:isActive() then
+    print("Condition met")
+end
+```
+
+AvatarPlayerAutofarm:isRotateLeft()
+
+Checks whether this avatar player autofarm is rotate left.
+
+```lua
+if autofarm:isRotateLeft() then
+    print("Condition met")
+end
+```
+
+AvatarPlayerAutofarm:isAutoCollectGems()
+
+Checks whether this avatar player autofarm is auto collect gems.
+
+```lua
+if autofarm:isAutoCollectGems() then
+    print("Condition met")
+end
+```
+
+---
+
+S
+
+AvatarPlayerAutofarm:setActive()
+
+Sets the active for this avatar player autofarm.
+
+```lua
+autofarm:setActive()
+```
+
+AvatarPlayerAutofarm:setTargetBlockID(targetBlock)
+
+Sets the target block ID for this avatar player autofarm. It uses targetBlock.
+
+```lua
+autofarm:setTargetBlockID(2)
+```
+
+AvatarPlayerAutofarm:setIsRotateLeft()
+
+Sets the is rotate left for this avatar player autofarm.
+
+```lua
+autofarm:setIsRotateLeft()
+```
+
+AvatarPlayerAutofarm:setNextPosX(x)
+
+Sets the next pos x for this avatar player autofarm. It uses x.
+
+```lua
+autofarm:setNextPosX(10)
+```
+
+AvatarPlayerAutofarm:setNextPosY(y)
+
+Sets the next pos y for this avatar player autofarm. It uses y.
+
+```lua
+autofarm:setNextPosY(10)
+```
+
+AvatarPlayerAutofarm:setDelay(autofarmDelay)
+
+Sets the delay for this avatar player autofarm. It uses autofarmDelay.
+
+```lua
+autofarm:setDelay(500)
+```
+
+AvatarPlayerAutofarm:setIsAutoCollectGems()
+
+Sets the is auto collect gems for this avatar player autofarm.
+
+```lua
+autofarm:setIsAutoCollectGems()
+```
+
+AvatarPlayerAutofarm:setSlots(autofarmSlots)
+
+Sets the slots for this avatar player autofarm. It uses autofarmSlots.
+
+```lua
+autofarm:setSlots(6)
+```
+
+================================================================================
+FILE: GTPS.Host - AvatarPlayerInventoryItem.md
+================================================================================
+
+AvatarPlayerInventoryItem Object API
+
+Last updated: 2026-06-27
+Obtained via player:getInventoryItems(). Represents a single inventory slot (item ID + count).
+
+---
+
+Quick Navigation
+
+G
+
+2 methods across 1 letter groups.
+
+---
+
+G
+
+AvatarPlayerInventoryItem:getItemID()
+
+Returns the item ID for this avatar player inventory item.
+
+```lua
+local itemID = item:getItemID()
+print("itemID:", itemID)
+```
+
+AvatarPlayerInventoryItem:getItemCount()
+
+Returns the item count for this avatar player inventory item.
+
+```lua
+local itemCount = item:getItemCount()
+print("itemCount:", itemCount)
+```
+
+================================================================================
+FILE: GTPS.Host - Callbacks.md
+================================================================================
+
+Callbacks API
+
+Last updated: 2026-06-27
+Raw binding list of every registered callback. Register a handler by passing a function — return true generally prevents the default behavior where noted; return false (or no return) allows it. For curated, hand-verified parameter orders and extra notes, see 07-callbacks.md.
+
+---
+
+Quick Navigation
+
+Player Events · Tile Events · World Events · Discord Events · Leaderboard & Stats · Server & System · Other Events
+
+92 callbacks across 7 groups.
+
+---
+
+Player Events
+
+onPlayerChatCallback
+
+Registers or documents the player chat callback. It receives world, player, message.
+
+```lua
+onPlayerChatCallback(function(world, player, message)
+    -- Fires for the player chat callback
+end)
+```
+
+onPlayerCommandCallback
+
+Registers or documents the player command callback. It receives world, player, command.
+
+```lua
+onPlayerCommandCallback(function(world, player, command)
+    -- Fires for the player command callback
+end)
+```
+
+onPlayerDialogCallback
+
+Registers or documents the player dialog response callback. It receives world, player, dialogName.
+
+```lua
+onPlayerDialogCallback(function(world, player, dialogName)
+    -- Fires for the player dialog response callback
+end)
+```
+
+onPlayerLoginCallback
+
+Registers or documents the player login callback. It receives player.
+
+```lua
+onPlayerLoginCallback(function(player)
+    -- Fires for the player login callback
+end)
+```
+
+onPlayerFirstTimeLoginCallback
+
+Registers or documents the first-time player login callback. It receives player.
+
+```lua
+onPlayerFirstTimeLoginCallback(function(player)
+    -- Fires for the first-time player login callback
+end)
+```
+
+onPlayerRegisterCallback
+
+Registers or documents the player registration callback. It receives world, player.
+
+```lua
+onPlayerRegisterCallback(function(world, player)
+    -- Fires for the player registration callback
+end)
+```
+
+onPlayerActionCallback
+
+Registers or documents the player action packet callback. It receives world, player, action.
+
+```lua
+onPlayerActionCallback(function(world, player, action)
+    -- Fires for the player action packet callback
+end)
+```
+
+onPlayerEnterWorldCallback
+
+Registers or documents the player entering a world callback. It receives world, player.
+
+```lua
+onPlayerEnterWorldCallback(function(world, player)
+    -- Fires for the player entering a world callback
+end)
+```
+
+onPlayerValidateWorldCallback
+
+Registers or documents the world validation for a player callback. It receives world, player.
+
+```lua
+onPlayerValidateWorldCallback(function(world, player)
+    -- Fires for the world validation for a player callback
+end)
+```
+
+onPlayerLeaveWorldCallback
+
+Registers or documents the player leaving a world callback. It receives world, player.
+
+```lua
+onPlayerLeaveWorldCallback(function(world, player)
+    -- Fires for the player leaving a world callback
+end)
+```
+
+onPlayerDisconnectCallback
+
+Registers or documents the player disconnect callback. It receives player.
+
+```lua
+onPlayerDisconnectCallback(function(player)
+    -- Fires for the player disconnect callback
+end)
+```
+
+onPlayerDeathCallback
+
+Registers or documents the player death callback. It receives world, player, spikeKill.
+
+```lua
+onPlayerDeathCallback(function(world, player, spikeKill)
+    -- Fires for the player death callback
+end)
+```
+
+onPlayerTradeCallback
+
+Registers or documents the player trade callback. It receives world, player, targetPlayer.
+
+```lua
+onPlayerTradeCallback(function(world, player, targetPlayer)
+    -- Fires for the player trade callback
+end)
+```
+
+onPlayerBoostClaimCallback
+
+Registers or documents the player boost claim callback. It receives player.
+
+```lua
+onPlayerBoostClaimCallback(function(player)
+    -- Fires for the player boost claim callback
+end)
+```
+
+onPlayerTrashCallback
+
+Registers or documents the player trashing an item callback. It receives world, player, itemID, itemCount.
+
+```lua
+onPlayerTrashCallback(function(world, player, itemID, itemCount)
+    -- Fires for the player trashing an item callback
+end)
+```
+
+onPlayerRecycleCallback
+
+Registers or documents the player recycling an item callback. It receives world, player, itemID, itemCount, gems.
+
+```lua
+onPlayerRecycleCallback(function(world, player, itemID, itemCount, gems)
+    -- Fires for the player recycling an item callback
+end)
+```
+
+onPlayerCrimeCallback
+
+Registers or documents the player crime reward callback. It receives world, player, rewardID, rewardAmount.
+
+```lua
+onPlayerCrimeCallback(function(world, player, rewardID, rewardAmount)
+    -- Fires for the player crime reward callback
+end)
+```
+
+onPlayerSurgeryCallback
+
+Registers or documents the player surgery result callback. It receives world, player, resultID, resultAmount, targetPlayer.
+
+```lua
+onPlayerSurgeryCallback(function(world, player, resultID, resultAmount, targetPlayer)
+    -- Fires for the player surgery result callback
+end)
+```
+
+onPlayerKillCallback
+
+Registers or documents the player kill event callback. It receives world, player, targetPlayer.
+
+```lua
+onPlayerKillCallback(function(world, player, targetPlayer)
+    -- Fires for the player kill event callback
+end)
+```
+
+onPlayerPunchPlayerCallback
+
+Registers or documents the player punching another player callback. It receives world, player, targetPlayer.
+
+```lua
+onPlayerPunchPlayerCallback(function(world, player, targetPlayer)
+    -- Fires for the player punching another player callback
+end)
+```
+
+onPlayerPunchNPCCallback
+
+Registers or documents the player punching an NPC callback. It receives world, player, npc.
+
+```lua
+onPlayerPunchNPCCallback(function(world, player, npc)
+    -- Fires for the player punching an NPC callback
+end)
+```
+
+onPlayerProviderCallback
+
+Registers or documents the provider collection callback. It receives world, player, tile, itemID, itemAmount.
+
+```lua
+onPlayerProviderCallback(function(world, player, tile, itemID, itemAmount)
+    -- Fires for the provider collection callback
+end)
+```
+
+onPlayerHarmonicCallback
+
+Registers or documents the harmonic action reward callback. It receives world, player, tile, itemID, amount.
+
+```lua
+onPlayerHarmonicCallback(function(world, player, tile, itemID, amount)
+    -- Fires for the harmonic action reward callback
+end)
+```
+
+onPlayerGeigerCallback
+
+Registers or documents the Geiger action reward callback. It receives world, player, itemID, amount.
+
+```lua
+onPlayerGeigerCallback(function(world, player, itemID, amount)
+    -- Fires for the Geiger action reward callback
+end)
+```
+
+onPlayerCatchGhostCallback
+
+Registers or documents the ghost catch reward callback. It receives world, player, jarID, amount.
+
+```lua
+onPlayerCatchGhostCallback(function(world, player, jarID, amount)
+    -- Fires for the ghost catch reward callback
+end)
+```
+
+onPlayerDNACallback
+
+Registers or documents the DNA result callback. It receives world, player, resultID, resultAmount.
+
+```lua
+onPlayerDNACallback(function(world, player, resultID, resultAmount)
+    -- Fires for the DNA result callback
+end)
+```
+
+onPlayerXPCallback
+
+Registers or documents the player XP change callback. It receives world, player, amount.
+
+```lua
+onPlayerXPCallback(function(world, player, amount)
+    -- Fires for the player XP change callback
+end)
+```
+
+onPlayerFirePutOutCallback
+
+Registers or documents the player putting out fire callback. It receives world, player, tile.
+
+```lua
+onPlayerFirePutOutCallback(function(world, player, tile)
+    -- Fires for the player putting out fire callback
+end)
+```
+
+onPlayerGemsObtainedCallback
+
+Registers or documents the player obtaining gems callback. It receives world, player, amount.
+
+```lua
+onPlayerGemsObtainedCallback(function(world, player, amount)
+    -- Fires for the player obtaining gems callback
+end)
+```
+
+onPlayerEarnGrowtokenCallback
+
+Registers or documents the player earning Growtoken progress callback. It receives world, player, progressAmount.
+
+```lua
+onPlayerEarnGrowtokenCallback(function(world, player, progressAmount)
+    -- Fires for the player earning Growtoken progress callback
+end)
+```
+
+onPlayerTrainFishCallback
+
+Registers or documents the player fish training callback. It receives world, player.
+
+```lua
+onPlayerTrainFishCallback(function(world, player)
+    -- Fires for the player fish training callback
+end)
+```
+
+onPlayerVariantCallback
+
+Registers or documents the player variant packet callback. It receives player, variant, delay, netID.
+
+```lua
+onPlayerVariantCallback(function(player, variant, delay, netID)
+    -- Fires for the player variant packet callback
+end)
+```
+
+onPlayerRawPacketCallback
+
+Registers or documents the player raw packet callback. It receives player, packet.
+
+```lua
+onPlayerRawPacketCallback(function(player, packet)
+    -- Fires for the player raw packet callback
+end)
+```
+
+onPlayerDropCallback
+
+Registers or documents the player dropping an item callback. It receives world, player, itemID, itemCount.
+
+```lua
+onPlayerDropCallback(function(world, player, itemID, itemCount)
+    -- Fires for the player dropping an item callback
+end)
+```
+
+onPlayerLevelUPCallback
+
+Registers or documents the player level up callback. It receives world, player, level.
+
+```lua
+onPlayerLevelUPCallback(function(world, player, level)
+    -- Fires for the player level up callback
+end)
+```
+
+onPlayerEquipClothingCallback
+
+Registers or documents the player equipping clothing callback. It receives world, player, itemID.
+
+```lua
+onPlayerEquipClothingCallback(function(world, player, itemID)
+    -- Fires for the player equipping clothing callback
+end)
+```
+
+onPlayerUnequipClothingCallback
+
+Registers or documents the player unequipping clothing callback. It receives world, player, itemID.
+
+```lua
+onPlayerUnequipClothingCallback(function(world, player, itemID)
+    -- Fires for the player unequipping clothing callback
+end)
+```
+
+onPlayerEquippedClothingCallback
+
+Registers or documents the player clothing equipped confirmation callback. It receives world, player, itemID.
+
+```lua
+onPlayerEquippedClothingCallback(function(world, player, itemID)
+    -- Fires for the player clothing equipped confirmation callback
+end)
+```
+
+onPlayerUnequippedClothingCallback
+
+Registers or documents the player clothing unequipped confirmation callback. It receives world, player, itemID.
+
+```lua
+onPlayerUnequippedClothingCallback(function(world, player, itemID)
+    -- Fires for the player clothing unequipped confirmation callback
+end)
+```
+
+onPlayerPickupItemCallback
+
+Registers or documents the player picking up an item callback. It receives world, player, itemID, itemCount.
+
+```lua
+onPlayerPickupItemCallback(function(world, player, itemID, itemCount)
+    -- Fires for the player picking up an item callback
+end)
+```
+
+onPlayerEnterDoorCallback
+
+Registers or documents the player entering a door callback. It receives world, player, doorTarget, doorID.
+
+```lua
+onPlayerEnterDoorCallback(function(world, player, doorTarget, doorID)
+    -- Fires for the player entering a door callback
+end)
+```
+
+onPlayerPlantCallback
+
+Registers or documents the player planting on a tile callback. It receives world, player, tile.
+
+```lua
+onPlayerPlantCallback(function(world, player, tile)
+    -- Fires for the player planting on a tile callback
+end)
+```
+
+onPlayerHarvestCallback
+
+Registers or documents the player harvesting a tile callback. It receives world, player, tile.
+
+```lua
+onPlayerHarvestCallback(function(world, player, tile)
+    -- Fires for the player harvesting a tile callback
+end)
+```
+
+onPlayerCatchFishCallback
+
+Registers or documents the player catching fish or fishing reward callback. It receives world, player, rewardID, rewardAmount.
+
+```lua
+onPlayerCatchFishCallback(function(world, player, rewardID, rewardAmount)
+    -- Fires for the player catching fish or fishing reward callback
+end)
+```
+
+onPlayerWrenchCallback
+
+Registers or documents the player wrench action callback. It receives world, player, targetPlayer.
+
+```lua
+onPlayerWrenchCallback(function(world, player, targetPlayer)
+    -- Fires for the player wrench action callback
+end)
+```
+
+onPlayerBlessingClaimCallback
+
+Registers or documents the player blessing claim callback. It receives world, player, blessingID.
+
+```lua
+onPlayerBlessingClaimCallback(function(world, player, blessingID)
+    -- Fires for the player blessing claim callback
+end)
+```
+
+onPlayerConvertItemCallback
+
+Registers or documents the player item conversion callback. It receives world, player, itemID.
+
+```lua
+onPlayerConvertItemCallback(function(world, player, itemID)
+    -- Fires for the player item conversion callback
+end)
+```
+
+onPlayerAddFriendCallback
+
+Registers or documents the player adding a friend callback. It receives world, player, targetPlayer.
+
+```lua
+onPlayerAddFriendCallback(function(world, player, targetPlayer)
+    -- Fires for the player adding a friend callback
+end)
+```
+
+onPlayerProfileRequest
+
+Registers or documents the player profile request callback. It receives world, player, tab, flags.
+
+```lua
+onPlayerProfileRequest(function(world, player, tab, flags)
+    -- Fires for the player profile request callback
+end)
+```
+
+onStoreRequest
+
+Registers or documents the store request callback. It receives world, player.
+
+```lua
+onStoreRequest(function(world, player)
+    -- Fires for the store request callback
+end)
+```
+
+onPlayerConsumableCallback
+
+Registers or documents the player consumable use callback. It receives world, player, tile, itemID, targetPlayer.
+
+```lua
+onPlayerConsumableCallback(function(world, player, tile, itemID, targetPlayer)
+    -- Fires for the player consumable use callback
+end)
+```
+
+onPlayerTick
+
+Registers or documents the player tick callback. It receives player.
+
+```lua
+onPlayerTick(function(player)
+    -- Fires for the player tick callback
+end)
+```
+
+onPlayerDungeonEntitySlainCallback
+
+Registers or documents the dungeon entity slain by a player callback. It receives world, player, entityType.
+
+```lua
+onPlayerDungeonEntitySlainCallback(function(world, player, entityType)
+    -- Fires for the dungeon entity slain by a player callback
+end)
+```
+
+onPlayerStartopiaCallback
+
+Registers or documents the Startopia reward callback. It receives world, player, rewardID, rewardAmount, statusID.
+
+```lua
+onPlayerStartopiaCallback(function(world, player, rewardID, rewardAmount, statusID)
+    -- Fires for the Startopia reward callback
+end)
+```
+
+onPlayerPunchCallback
+
+Registers or documents the player punch coordinates callback. It receives world, player, x, y.
+
+```lua
+onPlayerPunchCallback(function(world, player, x, y)
+    -- Fires for the player punch coordinates callback
+end)
+```
+
+onPlayerCookingCallback
+
+Registers or documents the player-cooking callback. The handler receives the world, player, result item ID, and result amount.
+
+```lua
+onPlayerCookingCallback(function(world, player, resultID, resultAmount)
+    -- Fires for the player-cooking callback
+end)
+```
+
+onPlayerVendingBuyCallback
+
+Registers or documents the player buying from vending callback. It receives world, player, tile, itemID, itemCount.
+
+```lua
+onPlayerVendingBuyCallback(function(world, player, tile, itemID, itemCount)
+    -- Fires for the player buying from vending callback
+end)
+```
+
+onPlayerSpliceSeedCallback
+
+Registers or documents the player splicing seeds callback. It receives world, player, tile, seedID.
+
+```lua
+onPlayerSpliceSeedCallback(function(world, player, tile, seedID)
+    -- Fires for the player splicing seeds callback
+end)
+```
+
+onPlayerCardBattleCallback
+
+Registers or documents the player card battle reward callback. It receives world, player, targetPlayer, rewardID, rewardAmount.
+
+```lua
+onPlayerCardBattleCallback(function(world, player, targetPlayer, rewardID, rewardAmount)
+    -- Fires for the player card battle reward callback
+end)
+```
+
+onPlayerDepositCallback
+
+Registers or documents the player depositing an item callback. It receives world, player, tile, itemID, itemCount.
+
+```lua
+onPlayerDepositCallback(function(world, player, tile, itemID, itemCount)
+    -- Fires for the player depositing an item callback
+end)
+```
+
+onPlayerRoleChangedCallback
+
+Registers or documents the player role change callback. It receives player, newRoleID, oldRoleID.
+
+```lua
+onPlayerRoleChangedCallback(function(player, newRoleID, oldRoleID)
+    -- Fires for the player role change callback
+end)
+```
+
+onPlayerLoseCardBattleCallback
+
+Registers or documents the player losing a card battle callback. It receives world, player, targetPlayer.
+
+```lua
+onPlayerLoseCardBattleCallback(function(world, player, targetPlayer)
+    -- Fires for the player losing a card battle callback
+end)
+```
+
+onPlayerEarnAchievementCallback
+
+Registers or documents the player earning an achievement callback. It receives world, player, achievementType.
+
+```lua
+onPlayerEarnAchievementCallback(function(world, player, achievementType)
+    -- Fires for the player earning an achievement callback
+end)
+```
+
+onPlayerSewCallback
+
+Registers or documents the player sewing reward callback. It receives world, player, resultID, resultAmount.
+
+```lua
+onPlayerSewCallback(function(world, player, resultID, resultAmount)
+    -- Fires for the player sewing reward callback
+end)
+```
+
+onPlayerPetBattleCallback
+
+Registers or documents the player pet battle callback. It receives world, player, targetPlayer.
+
+```lua
+onPlayerPetBattleCallback(function(world, player, targetPlayer)
+    -- Fires for the player pet battle callback
+end)
+```
+
+onPlayerGemsChangedCallback
+
+Registers or documents the player gem balance change callback. It receives world, player, previousGems.
+
+```lua
+onPlayerGemsChangedCallback(function(world, player, previousGems)
+    -- Fires for the player gem balance change callback
+end)
+```
+
+onPlayerCoinsChangedCallback
+
+Registers or documents the player coin balance change callback. It receives world, player, previousCoins.
+
+```lua
+onPlayerCoinsChangedCallback(function(world, player, previousCoins)
+    -- Fires for the player coin balance change callback
+end)
+```
+
+onPlayerPlaymodAddedCallback
+
+Registers or documents the playmod added to a player callback. It receives player, modType, lastsForSeconds, applier.
+
+```lua
+onPlayerPlaymodAddedCallback(function(player, modType, lastsForSeconds, applier)
+    -- Fires for the playmod added to a player callback
+end)
+```
+
+onPlayerPlaymodRemovedCallback
+
+Registers or documents the playmod removed from a player callback. It receives player, modType.
+
+```lua
+onPlayerPlaymodRemovedCallback(function(player, modType)
+    -- Fires for the playmod removed from a player callback
+end)
+```
+
+onPlayerFishingStatusCallback
+
+Registers or documents the player fishing status update callback. It receives world, player, tile, status, itemID.
+
+```lua
+onPlayerFishingStatusCallback(function(world, player, tile, status, itemID)
+    -- Fires for the player fishing status update callback
+end)
+```
+
+---
+
+Tile Events
+
+onTileWrenchCallback
+
+Registers or documents the tile wrench action callback. It receives world, player, tile.
+
+```lua
+onTileWrenchCallback(function(world, player, tile)
+    -- Fires for the tile wrench action callback
+end)
+```
+
+onTileBreakCallback
+
+Registers or documents the tile break callback. It receives world, player, tile.
+
+```lua
+onTileBreakCallback(function(world, player, tile)
+    -- Fires for the tile break callback
+end)
+```
+
+onTilePlaceCallback
+
+Registers or documents the tile placement attempt callback. It receives world, player, tile, itemID.
+
+```lua
+onTilePlaceCallback(function(world, player, tile, itemID)
+    -- Fires for the tile placement attempt callback
+end)
+```
+
+onTilePlacedCallback
+
+Registers or documents the tile placement completion callback. It receives world, player, tile.
+
+```lua
+onTilePlacedCallback(function(world, player, tile)
+    -- Fires for the tile placement completion callback
+end)
+```
+
+onTilePunchCallback
+
+Registers or documents the tile punch callback. It receives world, player, tile.
+
+```lua
+onTilePunchCallback(function(world, player, tile)
+    -- Fires for the tile punch callback
+end)
+```
+
+onPlayerActivateTileCallback
+
+Registers or documents the player activating a tile callback. It receives world, player, tile.
+
+```lua
+onPlayerActivateTileCallback(function(world, player, tile)
+    -- Fires for the player activating a tile callback
+end)
+```
+
+onGetTileExtraDataCallback
+
+Registers or documents the tile extra-data request callback. It receives world, tile, gameVersion, refPlayer.
+
+```lua
+onGetTileExtraDataCallback(function(world, tile, gameVersion, refPlayer)
+    -- Fires for the tile extra-data request callback
+end)
+```
+
+---
+
+World Events
+
+onWorldMenuRequest
+
+Registers or documents the world menu request callback. It receives player, categorySelection, newSelection.
+
+```lua
+onWorldMenuRequest(function(player, categorySelection, newSelection)
+    -- Fires for the world menu request callback
+end)
+```
+
+onWorldTick
+
+Registers or documents the world tick callback. It receives world.
+
+```lua
+onWorldTick(function(world)
+    -- Fires for the world tick callback
+end)
+```
+
+onWorldLoaded
+
+Registers or documents the world load callback. It receives world.
+
+```lua
+onWorldLoaded(function(world)
+    -- Fires for the world load callback
+end)
+```
+
+onWorldOffloaded
+
+Registers or documents the world offload callback. It receives world.
+
+```lua
+onWorldOffloaded(function(world)
+    -- Fires for the world offload callback
+end)
+```
+
+---
+
+Discord Events
+
+onDiscordMessageCreateCallback
+
+Registers or documents the Discord message creation callback. It receives event.
+
+```lua
+onDiscordMessageCreateCallback(function(event)
+    -- Fires for the Discord message creation callback
+end)
+```
+
+onDiscordButtonClickCallback
+
+Registers or documents the Discord button click callback. It receives event.
+
+```lua
+onDiscordButtonClickCallback(function(event)
+    -- Fires for the Discord button click callback
+end)
+```
+
+onDiscordFormSubmitCallback
+
+Registers or documents the Discord form submission callback. It receives event.
+
+```lua
+onDiscordFormSubmitCallback(function(event)
+    -- Fires for the Discord form submission callback
+end)
+```
+
+onDiscordBotReadyCallback
+
+Registers or documents the Discord bot ready event callback. It receives no arguments.
+
+```lua
+onDiscordBotReadyCallback(function()
+    -- Fires for the Discord bot ready event callback
+end)
+```
+
+onDiscordSlashCommandCallback
+
+Registers or documents the Discord slash command callback. It receives event.
+
+```lua
+onDiscordSlashCommandCallback(function(event)
+    -- Fires for the Discord slash command callback
+end)
+```
+
+---
+
+Leaderboard & Stats
+
+onLeaderboardEndCallback
+
+Registers or documents the leaderboard completion callback. It receives player, leaderboardType, rank.
+
+```lua
+onLeaderboardEndCallback(function(player, leaderboardType, rank)
+    -- Fires for the leaderboard completion callback
+end)
+```
+
+---
+
+Server & System
+
+onAutoSaveRequest
+
+Registers or documents the auto-save request callback. It receives no arguments.
+
+```lua
+onAutoSaveRequest(function()
+    -- Fires for the auto-save request callback
+end)
+```
+
+onEventChangedCallback
+
+Registers or documents the server event change callback. It receives eventID, oldEventID.
+
+```lua
+onEventChangedCallback(function(eventID, oldEventID)
+    -- Fires for the server event change callback
+end)
+```
+
+onTick
+
+Registers or documents the server tick callback. It receives no arguments.
+
+```lua
+onTick(function()
+    -- Fires for the server tick callback
+end)
+```
+
+onHTTPRequest
+
+Registers or documents the incoming HTTP request callback. It receives request.
+
+```lua
+onHTTPRequest(function(request)
+    -- Fires for the incoming HTTP request callback
+end)
+```
+
+---
+
+Other Events
+
+onServerReceiveRawPacketCallback
+
+Registers or documents the server receiving a raw packet callback. It receives world, player, packet.
+
+```lua
+onServerReceiveRawPacketCallback(function(world, player, packet)
+    -- Fires for the server receiving a raw packet callback
+end)
+```
+
+================================================================================
+FILE: GTPS.Host - DiscordBot.md
+================================================================================
+
+DiscordBot Object API
+
+Last updated: 2026-06-27
+Static-style bot methods used to send/edit Discord messages and manage guild roles.
+
+---
+
+Quick Navigation
+
+D · G · M
+
+9 methods across 3 letter groups.
+
+---
+
+D
+
+DiscordBot:directMessageCreate(content, optional - flags, optional - type)
+
+Runs the direct message create operation for this discord bot. It uses content, optional flags, optional type.
+
+```lua
+bot:directMessageCreate("Hello!", 0, 1)
+```
+
+---
+
+G
+
+DiscordBot:globalCommandCreate(description)
+
+Runs the global command create operation for this discord bot. It uses description.
+
+```lua
+bot:globalCommandCreate("A short description.")
+```
+
+DiscordBot:guildMemberSetNickname(nick)
+
+Runs the guild member set nickname operation for this discord bot. It uses nick.
+
+```lua
+bot:guildMemberSetNickname("NewNick")
+```
+
+DiscordBot:guildMemberRemoveRole()
+
+Runs the guild member remove role operation for this discord bot.
+
+```lua
+bot:guildMemberRemoveRole()
+```
+
+DiscordBot:guildMemberAddRole()
+
+Runs the guild member add role operation for this discord bot.
+
+```lua
+bot:guildMemberAddRole()
+```
+
+DiscordBot:guildMemberGetRoles()
+
+Runs the guild member get roles operation for this discord bot.
+
+```lua
+bot:guildMemberGetRoles()
+```
+
+---
+
+M
+
+DiscordBot:messageCreate(content, optional - flags, optional - type)
+
+Runs the message create operation for this discord bot. It uses content, optional flags, optional type.
+
+```lua
+bot:messageCreate("Hello!", 0, 1)
+```
+
+DiscordBot:messageDelete()
+
+Runs the message delete operation for this discord bot.
+
+```lua
+bot:messageDelete()
+```
+
+DiscordBot:messageEdit(content, optional - flags, optional - type)
+
+Runs the message edit operation for this discord bot. It uses content, optional flags, optional type.
+
+```lua
+bot:messageEdit("Hello!", 0, 1)
+```
+
+================================================================================
+FILE: GTPS.Host - DiscordButtonClickEvent.md
+================================================================================
+
+DiscordButtonClickEvent Object API
+
+Last updated: 2026-06-27
+Passed as the event argument inside onDiscordButtonClickCallback(function(event) ... end).
+
+---
+
+Quick Navigation
+
+D · E · G · R
+
+9 methods across 4 letter groups.
+
+---
+
+D
+
+DiscordButtonClickEvent:dialog()
+
+Runs the dialog operation for this discord button click event.
+
+```lua
+event:dialog()
+```
+
+---
+
+E
+
+DiscordButtonClickEvent:editOriginalResponse(content, optional - flags)
+
+Runs the edit original response operation for this discord button click event. It uses content, optional flags.
+
+```lua
+event:editOriginalResponse("Hello!", 0)
+```
+
+---
+
+G
+
+DiscordButtonClickEvent:getCustomID()
+
+Returns the custom ID for this discord button click event.
+
+```lua
+local customID = event:getCustomID()
+print("customID:", customID)
+```
+
+DiscordButtonClickEvent:getPlayer()
+
+Returns the player for this discord button click event.
+
+```lua
+local player = event:getPlayer()
+print("player:", player)
+```
+
+DiscordButtonClickEvent:getChannelID()
+
+Returns the channel ID for this discord button click event.
+
+```lua
+local channelID = event:getChannelID()
+print("channelID:", channelID)
+```
+
+DiscordButtonClickEvent:getAuthorID()
+
+Returns the author ID for this discord button click event.
+
+```lua
+local authorID = event:getAuthorID()
+print("authorID:", authorID)
+```
+
+DiscordButtonClickEvent:getMessageID()
+
+Returns the message ID for this discord button click event.
+
+```lua
+local messageID = event:getMessageID()
+print("messageID:", messageID)
+```
+
+DiscordButtonClickEvent:getRoles()
+
+Returns the roles for this discord button click event.
+
+```lua
+local roles = event:getRoles()
+print("roles:", roles)
+```
+
+---
+
+R
+
+DiscordButtonClickEvent:reply(content, optional - flags)
+
+Runs the reply operation for this discord button click event. It uses content, optional flags.
+
+```lua
+event:reply("Hello!", 0)
+```
+
+================================================================================
+FILE: GTPS.Host - DiscordFormSubmitEvent.md
+================================================================================
+
+DiscordFormSubmitEvent Object API
+
+Last updated: 2026-06-27
+Passed as the event argument inside onDiscordFormSubmitCallback(function(event) ... end).
+
+---
+
+Quick Navigation
+
+G · R
+
+8 methods across 2 letter groups.
+
+---
+
+G
+
+DiscordFormSubmitEvent:getCustomID()
+
+Returns the custom ID for this discord form submit event.
+
+```lua
+local customID = event:getCustomID()
+print("customID:", customID)
+```
+
+DiscordFormSubmitEvent:getPlayer()
+
+Returns the player for this discord form submit event.
+
+```lua
+local player = event:getPlayer()
+print("player:", player)
+```
+
+DiscordFormSubmitEvent:getChannelID()
+
+Returns the channel ID for this discord form submit event.
+
+```lua
+local channelID = event:getChannelID()
+print("channelID:", channelID)
+```
+
+DiscordFormSubmitEvent:getAuthorID()
+
+Returns the author ID for this discord form submit event.
+
+```lua
+local authorID = event:getAuthorID()
+print("authorID:", authorID)
+```
+
+DiscordFormSubmitEvent:getValue(id)
+
+Returns the value for this discord form submit event.
+
+```lua
+local value = event:getValue(242)
+print("value:", value)
+```
+
+DiscordFormSubmitEvent:getMessageID()
+
+Returns the message ID for this discord form submit event.
+
+```lua
+local messageID = event:getMessageID()
+print("messageID:", messageID)
+```
+
+DiscordFormSubmitEvent:getRoles()
+
+Returns the roles for this discord form submit event.
+
+```lua
+local roles = event:getRoles()
+print("roles:", roles)
+```
+
+---
+
+R
+
+DiscordFormSubmitEvent:reply(content, optional - flags)
+
+Runs the reply operation for this discord form submit event. It uses content, optional flags.
+
+```lua
+event:reply("Hello!", 0)
+```
+
+================================================================================
+FILE: GTPS.Host - DiscordMessageCreateEvent.md
+================================================================================
+
+DiscordMessageCreateEvent Object API
+
+Last updated: 2026-06-27
+Passed as the event argument inside onDiscordMessageCreateCallback(function(event) ... end).
+
+---
+
+Quick Navigation
+
+G · I · R
+
+9 methods across 3 letter groups.
+
+---
+
+G
+
+DiscordMessageCreateEvent:getContent()
+
+Returns the content for this discord message create event.
+
+```lua
+local content = event:getContent()
+print("content:", content)
+```
+
+DiscordMessageCreateEvent:getPlayer()
+
+Returns the player for this discord message create event.
+
+```lua
+local player = event:getPlayer()
+print("player:", player)
+```
+
+DiscordMessageCreateEvent:getChannelID()
+
+Returns the channel ID for this discord message create event.
+
+```lua
+local channelID = event:getChannelID()
+print("channelID:", channelID)
+```
+
+DiscordMessageCreateEvent:getAuthorID()
+
+Returns the author ID for this discord message create event.
+
+```lua
+local authorID = event:getAuthorID()
+print("authorID:", authorID)
+```
+
+DiscordMessageCreateEvent:getMentionedUsers()
+
+Returns the mentioned users for this discord message create event.
+
+```lua
+local mentionedUsers = event:getMentionedUsers()
+print("mentionedUsers:", mentionedUsers)
+```
+
+DiscordMessageCreateEvent:getMessageID()
+
+Returns the message ID for this discord message create event.
+
+```lua
+local messageID = event:getMessageID()
+print("messageID:", messageID)
+```
+
+DiscordMessageCreateEvent:getRoles()
+
+Returns the roles for this discord message create event.
+
+```lua
+local roles = event:getRoles()
+print("roles:", roles)
+```
+
+---
+
+I
+
+DiscordMessageCreateEvent:isBot()
+
+Checks whether this discord message create event is bot.
+
+```lua
+if event:isBot() then
+    print("Condition met")
+end
+```
+
+---
+
+R
+
+DiscordMessageCreateEvent:reply(content, optional - flags, optional - mention_replied_user)
+
+Runs the reply operation for this discord message create event. It uses content, optional flags, optional mention_replied_user.
+
+```lua
+event:reply("Hello!", 0, 1)
+```
+
+================================================================================
+FILE: GTPS.Host - DiscordSlashCommandEvent.md
+================================================================================
+
+DiscordSlashCommandEvent Object API
+
+Last updated: 2026-06-27
+Passed as the event argument inside onDiscordSlashCommandCallback(function(event) ... end).
+
+---
+
+Quick Navigation
+
+D · E · G · R · T
+
+10 methods across 5 letter groups.
+
+---
+
+D
+
+DiscordSlashCommandEvent:dialog()
+
+Runs the dialog operation for this discord slash command event.
+
+```lua
+event:dialog()
+```
+
+---
+
+E
+
+DiscordSlashCommandEvent:editOriginalResponse(content, optional - flags)
+
+Runs the edit original response operation for this discord slash command event. It uses content, optional flags.
+
+```lua
+event:editOriginalResponse("Hello!", 0)
+```
+
+---
+
+G
+
+DiscordSlashCommandEvent:getCommandName()
+
+Returns the command name for this discord slash command event.
+
+```lua
+local commandName = event:getCommandName()
+print("commandName:", commandName)
+```
+
+DiscordSlashCommandEvent:getParameter(parameter)
+
+Returns the parameter for this discord slash command event.
+
+```lua
+local parameter = event:getParameter("option_name")
+print("parameter:", parameter)
+```
+
+DiscordSlashCommandEvent:getPlayer()
+
+Returns the player for this discord slash command event.
+
+```lua
+local player = event:getPlayer()
+print("player:", player)
+```
+
+DiscordSlashCommandEvent:getChannelID()
+
+Returns the channel ID for this discord slash command event.
+
+```lua
+local channelID = event:getChannelID()
+print("channelID:", channelID)
+```
+
+DiscordSlashCommandEvent:getAuthorID()
+
+Returns the author ID for this discord slash command event.
+
+```lua
+local authorID = event:getAuthorID()
+print("authorID:", authorID)
+```
+
+DiscordSlashCommandEvent:getRoles()
+
+Returns the roles for this discord slash command event.
+
+```lua
+local roles = event:getRoles()
+print("roles:", roles)
+```
+
+---
+
+R
+
+DiscordSlashCommandEvent:reply(content, optional - flags)
+
+Runs the reply operation for this discord slash command event. It uses content, optional flags.
+
+```lua
+event:reply("Hello!", 0)
+```
+
+---
+
+T
+
+DiscordSlashCommandEvent:thinking(optional - ephemeral)
+
+Runs the thinking operation for this discord slash command event. It uses optional ephemeral.
+
+```lua
+event:thinking(1)
+```
+
+================================================================================
+FILE: GTPS.Host - Drop.md
+================================================================================
+
+Drop Object API
+
+Last updated: 2026-06-27
+Obtained via world:getDroppedItems() or returned by world:spawnItem(...). Represents an item dropped on the ground.
+
+---
+
+Quick Navigation
+
+G
+
+6 methods across 1 letter groups.
+
+---
+
+G
+
+Drop:getItemID()
+
+Returns the item ID for this drop.
+
+```lua
+local itemID = drop:getItemID()
+print("itemID:", itemID)
+```
+
+Drop:getItemCount()
+
+Returns the item count for this drop.
+
+```lua
+local itemCount = drop:getItemCount()
+print("itemCount:", itemCount)
+```
+
+Drop:getPosX()
+
+Returns the pos x for this drop.
+
+```lua
+local posX = drop:getPosX()
+print("posX:", posX)
+```
+
+Drop:getPosY()
+
+Returns the pos y for this drop.
+
+```lua
+local posY = drop:getPosY()
+print("posY:", posY)
+```
+
+Drop:getUID()
+
+Returns the uid for this drop.
+
+```lua
+local uID = drop:getUID()
+print("uID:", uID)
+```
+
+Drop:getFlags()
+
+Returns the flags for this drop.
+
+```lua
+local flags = drop:getFlags()
+print("flags:", flags)
+```
+
+================================================================================
+FILE: GTPS.Host - Font.md
+================================================================================
+
+Font Object API
+
+Last updated: 2026-06-27
+A loadable font resource, used together with RenderTexture:drawText.
+
+---
+
+Quick Navigation
+
+L · N
+
+2 methods across 2 letter groups.
+
+---
+
+L
+
+Font:loadFromFile(path)
+
+Loads from file from storage or server state. It uses path.
+
+```lua
+font:loadFromFile("interface/myfile.rttex")
+```
+
+---
+
+N
+
+Font:new()
+
+Runs the new operation for this font.
+
+```lua
+font:new()
+```
+
+================================================================================
+FILE: GTPS.Host - Global Functions.md
+================================================================================
+
+Global Functions API
+
+Last updated: 2026-06-27
+Global functions are called directly, without an object prefix (getPlayer(...), not something:getPlayer(...)). For curated, hand-verified usage notes and workflow examples, see 08-server-global.md.
+
+---
+
+Quick Navigation
+
+A · B · C · D · E · F · G · H · I · L · M · O · P · Q · R · S · W
+
+139 functions across 17 letter groups.
+
+---
+
+A
+
+addDailyOfferPurchased(userID, storeItemID)
+
+Adds daily offer purchased data or value to this Lua API. It uses userID, storeItemID.
+
+```lua
+addDailyOfferPurchased(0, 5001)
+```
+
+addWorldMenuWorld(world_id, display_name, decimal_color, is_priority)
+
+Adds world menu world data or value to this Lua API. It uses world_id, display_name, decimal_color, is_priority.
+
+```lua
+addWorldMenuWorld(1, "My World", 16711680, 1)
+```
+
+addSocialPortalButton(button_data)
+
+Adds social portal button data or value to this Lua API. It uses button_data.
+
+```lua
+addSocialPortalButton(json.encode({ name = "MyButton" }))
+```
+
+addSidebarButton(sidebar_button)
+
+Adds sidebar button data or value to this Lua API. It uses sidebar_button.
+
+```lua
+addSidebarButton(json.encode({ name = "MyButton" }))
+```
+
+applyTemplate(backupName)
+
+Applies the template to the target resource. It uses backupName.
+
+```lua
+applyTemplate("pre-edit-backup")
+```
+
+bit.arshift(a, optional - b)
+
+Performs an arithmetic right-shift bitwise operation and returns the numeric result. The shift amount is optional and defaults according to the binding.
+
+```lua
+bit.arshift(255, 0)
+```
+
+---
+
+B
+
+bit.band(a, optional - b)
+
+Performs a bitwise AND operation and returns the numeric result. The second operand is optional and defaults according to the binding.
+
+```lua
+bit.band(255, 0)
+```
+
+bit.bor(a, optional - b)
+
+Performs a bitwise OR operation and returns the numeric result. The second operand is optional and defaults according to the binding.
+
+```lua
+bit.bor(255, 0)
+```
+
+bit.bxor(a, optional - b)
+
+Performs a bitwise XOR operation and returns the numeric result. The second operand is optional and defaults according to the binding.
+
+```lua
+bit.bxor(255, 0)
+```
+
+bit.bnot(a)
+
+Performs a bitwise NOT operation and returns the numeric result.
+
+```lua
+bit.bnot(255)
+```
+
+---
+
+C
+
+createRedeemCode()
+
+Creates the redeem code resource or entry.
+
+```lua
+createRedeemCode()
+```
+
+createTemplate(backupName)
+
+Creates the template resource or entry. It uses backupName.
+
+```lua
+createTemplate("pre-edit-backup")
+```
+
+dir.create(path)
+
+Runs the create operation for this dir utility. It uses path.
+
+```lua
+dir.create("interface/myfile.rttex")
+```
+
+timer.clear(id)
+
+Cancels a timeout or interval by timer ID.
+
+```lua
+timer.clear(242)
+```
+
+LuaDB:close()
+
+Closes this Lua database handle.
+
+```lua
+db:close()
+```
+
+---
+
+D
+
+deleteAccount(id)
+
+Deletes the account resource. It uses id.
+
+```lua
+deleteAccount(242)
+```
+
+deleteWorld(id)
+
+Deletes the world resource. It uses id.
+
+```lua
+deleteWorld(242)
+```
+
+deleteGuild(id)
+
+Deletes the guild resource. It uses id.
+
+```lua
+deleteGuild(242)
+```
+
+deleteTemplate(backupName)
+
+Deletes the template resource. It uses backupName.
+
+```lua
+deleteTemplate("pre-edit-backup")
+```
+
+disableCaching(item_id)
+
+Disables caching for the target resource. It uses item_id.
+
+```lua
+disableCaching(242)
+```
+
+file.delete(path)
+
+Runs the delete operation for this file utility. It uses path.
+
+```lua
+file.delete("interface/myfile.rttex")
+```
+
+dir.delete(path)
+
+Runs the delete operation for this dir utility. It uses path.
+
+```lua
+dir.delete("interface/myfile.rttex")
+```
+
+---
+
+E
+
+enableCaching(item_id)
+
+Enables caching for the target resource. It uses item_id.
+
+```lua
+enableCaching(242)
+```
+
+file.exists(path)
+
+Runs the exists operation for this file utility. It uses path.
+
+```lua
+file.exists("interface/myfile.rttex")
+```
+
+dir.exists(path)
+
+Runs the exists operation for this dir utility. It uses path.
+
+```lua
+dir.exists("interface/myfile.rttex")
+```
+
+---
+
+F
+
+formatStoreTime(targetTime, currentTime)
+
+Formats store time into a script-friendly string. It uses targetTime, currentTime.
+
+```lua
+formatStoreTime(os.time() + 3600, os.time())
+```
+
+formatTime(targetTime, currentTime)
+
+Formats time into a script-friendly string. It uses targetTime, currentTime.
+
+```lua
+formatTime(os.time() + 3600, os.time())
+```
+
+---
+
+G
+
+getItem(itemID)
+
+Returns the item for this Lua API.
+
+```lua
+local item = getItem(242)
+print("item:", item)
+```
+
+getItemsCount()
+
+Returns the items count for this Lua API.
+
+```lua
+local itemsCount = getItemsCount()
+print("itemsCount:", itemsCount)
+```
+
+getMaxItems()
+
+Returns the max items for this Lua API.
+
+```lua
+local maxItems = getMaxItems()
+print("maxItems:", maxItems)
+```
+
+getRealGTItemsCount()
+
+Returns the real gtitems count for this Lua API.
+
+```lua
+local realGTItemsCount = getRealGTItemsCount()
+print("realGTItemsCount:", realGTItemsCount)
+```
+
+getServerPlayers()
+
+Returns the server players for this Lua API.
+
+```lua
+local serverPlayers = getServerPlayers()
+print("serverPlayers:", serverPlayers)
+```
+
+getServerWorlds()
+
+Returns the server worlds for this Lua API.
+
+```lua
+local serverWorlds = getServerWorlds()
+print("serverWorlds:", serverWorlds)
+```
+
+getAllPlayers()
+
+Returns the all players for this Lua API.
+
+```lua
+local allPlayers = getAllPlayers()
+print("allPlayers:", allPlayers)
+```
+
+getAllWorlds()
+
+Returns the all worlds for this Lua API.
+
+```lua
+local allWorlds = getAllWorlds()
+print("allWorlds:", allWorlds)
+```
+
+getAllGuilds()
+
+Returns the all guilds for this Lua API.
+
+```lua
+local allGuilds = getAllGuilds()
+print("allGuilds:", allGuilds)
+```
+
+getPlayer(userID)
+
+Returns the player for this Lua API.
+
+```lua
+local player = getPlayer(0)
+print("player:", player)
+```
+
+getPlayerByName(playerName, optional - client)
+
+Returns the player by name for this Lua API.
+
+```lua
+local playerByName = getPlayerByName("playerName", 1)
+print("playerByName:", playerByName)
+```
+
+getActiveDailyOffers()
+
+Returns the active daily offers for this Lua API.
+
+```lua
+local activeDailyOffers = getActiveDailyOffers()
+print("activeDailyOffers:", activeDailyOffers)
+```
+
+getEventOffers()
+
+Returns the event offers for this Lua API.
+
+```lua
+local eventOffers = getEventOffers()
+print("eventOffers:", eventOffers)
+```
+
+getCurrentServerEvent()
+
+Returns the current server event for this Lua API.
+
+```lua
+local currentServerEvent = getCurrentServerEvent()
+print("currentServerEvent:", currentServerEvent)
+```
+
+getCurrentServerDailyEvent()
+
+Returns the current server daily event for this Lua API.
+
+```lua
+local currentServerDailyEvent = getCurrentServerDailyEvent()
+print("currentServerDailyEvent:", currentServerDailyEvent)
+```
+
+getStoreItems()
+
+Returns the store items for this Lua API.
+
+```lua
+local storeItems = getStoreItems()
+print("storeItems:", storeItems)
+```
+
+getIOTMItem(itemID)
+
+Returns the iotmitem for this Lua API.
+
+```lua
+local iOTMItem = getIOTMItem(242)
+print("iOTMItem:", iOTMItem)
+```
+
+getEasterBuyTime(userID)
+
+Returns the easter buy time for this Lua API.
+
+```lua
+local easterBuyTime = getEasterBuyTime(0)
+print("easterBuyTime:", easterBuyTime)
+```
+
+getEasterEggs(userID)
+
+Returns the easter eggs for this Lua API.
+
+```lua
+local easterEggs = getEasterEggs(0)
+print("easterEggs:", easterEggs)
+```
+
+getTopPlayerByBalance()
+
+Returns the top player by balance for this Lua API.
+
+```lua
+local topPlayerByBalance = getTopPlayerByBalance()
+print("topPlayerByBalance:", topPlayerByBalance)
+```
+
+getTopWorldByVisitors()
+
+Returns the top world by visitors for this Lua API.
+
+```lua
+local topWorldByVisitors = getTopWorldByVisitors()
+print("topWorldByVisitors:", topWorldByVisitors)
+```
+
+getServerName()
+
+Returns the server name for this Lua API.
+
+```lua
+local serverName = getServerName()
+print("serverName:", serverName)
+```
+
+getServerID()
+
+Returns the server ID for this Lua API.
+
+```lua
+local serverID = getServerID()
+print("serverID:", serverID)
+```
+
+getNewsBanner()
+
+Returns the news banner for this Lua API.
+
+```lua
+local newsBanner = getNewsBanner()
+print("newsBanner:", newsBanner)
+```
+
+getNewsBannerDimensions()
+
+Returns the news banner dimensions for this Lua API.
+
+```lua
+local newsBannerDimensions = getNewsBannerDimensions()
+print("newsBannerDimensions:", newsBannerDimensions)
+```
+
+getTodaysDate()
+
+Returns the todays date for this Lua API.
+
+```lua
+local todaysDate = getTodaysDate()
+print("todaysDate:", todaysDate)
+```
+
+getTodaysEvents()
+
+Returns the todays events for this Lua API.
+
+```lua
+local todaysEvents = getTodaysEvents()
+print("todaysEvents:", todaysEvents)
+```
+
+getMaxLevel()
+
+Returns the max level for this Lua API.
+
+```lua
+local maxLevel = getMaxLevel()
+print("maxLevel:", maxLevel)
+```
+
+getCurrentEventDescription()
+
+Returns the current event description for this Lua API.
+
+```lua
+local currentEventDescription = getCurrentEventDescription()
+print("currentEventDescription:", currentEventDescription)
+```
+
+getCurrentDailyEventDescription()
+
+Returns the current daily event description for this Lua API.
+
+```lua
+local currentDailyEventDescription = getCurrentDailyEventDescription()
+print("currentDailyEventDescription:", currentDailyEventDescription)
+```
+
+getCurrentRoleDayDescription()
+
+Returns the current role day description for this Lua API.
+
+```lua
+local currentRoleDayDescription = getCurrentRoleDayDescription()
+print("currentRoleDayDescription:", currentRoleDayDescription)
+```
+
+getAchievementsCount()
+
+Returns the achievements count for this Lua API.
+
+```lua
+local achievementsCount = getAchievementsCount()
+print("achievementsCount:", achievementsCount)
+```
+
+getWorld(WorldID)
+
+Returns the world for this Lua API.
+
+```lua
+local world = getWorld(1)
+print("world:", world)
+```
+
+getGuild(GuildID)
+
+Returns the guild for this Lua API.
+
+```lua
+local guild = getGuild(1)
+print("guild:", guild)
+```
+
+getWorldByName(worldName)
+
+Returns the world by name for this Lua API.
+
+```lua
+local worldByName = getWorldByName("START")
+print("worldByName:", worldByName)
+```
+
+getActiveWorlds()
+
+Returns the active worlds for this Lua API.
+
+```lua
+local activeWorlds = getActiveWorlds()
+print("activeWorlds:", activeWorlds)
+```
+
+getCorruptedSouls(userID)
+
+Returns the corrupted souls for this Lua API.
+
+```lua
+local corruptedSouls = getCorruptedSouls(0)
+print("corruptedSouls:", corruptedSouls)
+```
+
+getCurrencyShortName()
+
+Returns the currency short name for this Lua API.
+
+```lua
+local currencyShortName = getCurrencyShortName()
+print("currencyShortName:", currencyShortName)
+```
+
+getCurrencyLongName()
+
+Returns the currency long name for this Lua API.
+
+```lua
+local currencyLongName = getCurrencyLongName()
+print("currencyLongName:", currencyLongName)
+```
+
+getCurrencyMediumName()
+
+Returns the currency medium name for this Lua API.
+
+```lua
+local currencyMediumName = getCurrencyMediumName()
+print("currencyMediumName:", currencyMediumName)
+```
+
+getCurrencyIcon()
+
+Returns the currency icon for this Lua API.
+
+```lua
+local currencyIcon = getCurrencyIcon()
+print("currencyIcon:", currencyIcon)
+```
+
+getBlessingName(blessingID)
+
+Returns the blessing name for this Lua API.
+
+```lua
+local blessingName = getBlessingName(1)
+print("blessingName:", blessingName)
+```
+
+getBlessingInfo(blessingID)
+
+Returns the blessing info for this Lua API.
+
+```lua
+local blessingInfo = getBlessingInfo(1)
+print("blessingInfo:", blessingInfo)
+```
+
+getBlessingRarity(blessingID)
+
+Returns the blessing rarity for this Lua API.
+
+```lua
+local blessingRarity = getBlessingRarity(1)
+print("blessingRarity:", blessingRarity)
+```
+
+getGemEvent()
+
+Returns the gem event for this Lua API.
+
+```lua
+local gemEvent = getGemEvent()
+print("gemEvent:", gemEvent)
+```
+
+getXPEvent()
+
+Returns the xpevent for this Lua API.
+
+```lua
+local xPEvent = getXPEvent()
+print("xPEvent:", xPEvent)
+```
+
+getRoles()
+
+Returns the roles for this Lua API.
+
+```lua
+local roles = getRoles()
+print("roles:", roles)
+```
+
+getTitles()
+
+Returns the titles for this Lua API.
+
+```lua
+local titles = getTitles()
+print("titles:", titles)
+```
+
+getPlaymods()
+
+Returns the playmods for this Lua API.
+
+```lua
+local playmods = getPlaymods()
+print("playmods:", playmods)
+```
+
+getHighestPriorityRole()
+
+Returns the highest priority role for this Lua API.
+
+```lua
+local highestPriorityRole = getHighestPriorityRole()
+print("highestPriorityRole:", highestPriorityRole)
+```
+
+getEcoQuantity(itemID)
+
+Returns the eco quantity for this Lua API.
+
+```lua
+local ecoQuantity = getEcoQuantity(242)
+print("ecoQuantity:", ecoQuantity)
+```
+
+getEcoQuantityPlayers(itemID)
+
+Returns the eco quantity players for this Lua API.
+
+```lua
+local ecoQuantityPlayers = getEcoQuantityPlayers(242)
+print("ecoQuantityPlayers:", ecoQuantityPlayers)
+```
+
+getEcoQuantityWorlds(itemID)
+
+Returns the eco quantity worlds for this Lua API.
+
+```lua
+local ecoQuantityWorlds = getEcoQuantityWorlds(242)
+print("ecoQuantityWorlds:", ecoQuantityWorlds)
+```
+
+getJimDailyQuest()
+
+Returns the jim daily quest for this Lua API.
+
+```lua
+local jimDailyQuest = getJimDailyQuest()
+print("jimDailyQuest:", jimDailyQuest)
+```
+
+getServerDefaultPort()
+
+Returns the server default port for this Lua API.
+
+```lua
+local serverDefaultPort = getServerDefaultPort()
+print("serverDefaultPort:", serverDefaultPort)
+```
+
+getEvents()
+
+Returns the events for this Lua API.
+
+```lua
+local events = getEvents()
+print("events:", events)
+```
+
+getDailyEvents()
+
+Returns the daily events for this Lua API.
+
+```lua
+local dailyEvents = getDailyEvents()
+print("dailyEvents:", dailyEvents)
+```
+
+getItemEffects()
+
+Returns the item effects for this Lua API.
+
+```lua
+local itemEffects = getItemEffects()
+print("itemEffects:", itemEffects)
+```
+
+getWorldEffects()
+
+Returns the world effects for this Lua API.
+
+```lua
+local worldEffects = getWorldEffects()
+print("worldEffects:", worldEffects)
+```
+
+getPlayerEffects()
+
+Returns the player effects for this Lua API.
+
+```lua
+local playerEffects = getPlayerEffects()
+print("playerEffects:", playerEffects)
+```
+
+getRoleQuestDay()
+
+Returns the role quest day for this Lua API.
+
+```lua
+local roleQuestDay = getRoleQuestDay()
+print("roleQuestDay:", roleQuestDay)
+```
+
+getAchievements()
+
+Returns the achievements for this Lua API.
+
+```lua
+local achievements = getAchievements()
+print("achievements:", achievements)
+```
+
+getMachineCaps()
+
+Returns the machine caps for this Lua API.
+
+```lua
+local machineCaps = getMachineCaps()
+print("machineCaps:", machineCaps)
+```
+
+getTemplates()
+
+Returns the templates for this Lua API.
+
+```lua
+local templates = getTemplates()
+print("templates:", templates)
+```
+
+http.get(url)
+
+Performs an asynchronous HTTP GET request and yields until a response is available.
+
+```lua
+http.get("https://api.example.com/data")
+```
+
+---
+
+H
+
+hideWorldMenuDefaultSpecialWorlds(hide_default_special_worlds)
+
+Runs the hide world menu default special worlds operation for this Lua API. It uses hide_default_special_worlds.
+
+```lua
+hideWorldMenuDefaultSpecialWorlds(1)
+```
+
+hasFeatureEnabled(name)
+
+Checks whether this Lua API has feature enabled. It uses name.
+
+```lua
+if hasFeatureEnabled("MyName") then
+    print("Condition met")
+end
+```
+
+hasTemplate(backupName)
+
+Checks whether this Lua API has template. It uses backupName.
+
+```lua
+if hasTemplate("pre-edit-backup") then
+    print("Condition met")
+end
+```
+
+---
+
+I
+
+isDailyOfferPurchased(userID, storeItemID)
+
+Checks whether this Lua API is daily offer purchased.
+
+```lua
+if isDailyOfferPurchased(0, 5001) then
+    print("Condition met")
+end
+```
+
+includeClientFile(url, name)
+
+Includes or registers the client file for Lua use. It uses url, name.
+
+```lua
+includeClientFile("https://api.example.com/data", "MyName")
+```
+
+---
+
+L
+
+loadDataFromServer(uniqueID)
+
+Loads data from server from storage or server state. It uses uniqueID.
+
+```lua
+loadDataFromServer(242)
+```
+
+loadStringFromServer(uniqueID)
+
+Loads string from server from storage or server state. It uses uniqueID.
+
+```lua
+loadStringFromServer(242)
+```
+
+bit.lshift(a, optional - b)
+
+Performs a left-shift bitwise operation and returns the numeric result. The shift amount is optional and defaults according to the binding.
+
+```lua
+bit.lshift(255, 0)
+```
+
+---
+
+M
+
+bit.mod(a, optional - b)
+
+Applies the bitmask-style modulo operation from the binding and returns the numeric result. The second operand is optional and defaults according to the binding.
+
+```lua
+bit.mod(255, 0)
+```
+
+---
+
+O
+
+onPlayerProfileRequest()
+
+Triggers the player profile request behavior for this Lua API.
+
+```lua
+onPlayerProfileRequest(function()
+    -- Triggers the player profile request behavior for this Lua API
+end)
+```
+
+onStoreRequest()
+
+Triggers the store request behavior for this Lua API.
+
+```lua
+onStoreRequest(function()
+    -- Triggers the store request behavior for this Lua API
+end)
+```
+
+onWorldMenuRequest()
+
+Triggers the world menu request behavior for this Lua API.
+
+```lua
+onWorldMenuRequest(function()
+    -- Triggers the world menu request behavior for this Lua API
+end)
+```
+
+onAutoSaveRequest()
+
+Triggers the auto save request behavior for this Lua API.
+
+```lua
+onAutoSaveRequest(function()
+    -- Triggers the auto save request behavior for this Lua API
+end)
+```
+
+db.open(path)
+
+Opens a Lua SQLite database handle for the provided storage path.
+
+```lua
+db.open("interface/myfile.rttex")
+```
+
+---
+
+P
+
+print()
+
+Runs the print operation for this Lua API.
+
+```lua
+print()
+```
+
+parseText(str)
+
+Parses text and returns the processed result. It uses str.
+
+```lua
+parseText("Hello!")
+```
+
+http.post(url, post_data)
+
+Performs an asynchronous HTTP POST request with the provided post body and yields until a response is available.
+
+```lua
+http.post("https://api.example.com/data", json.encode({ key = "value" }))
+```
+
+---
+
+Q
+
+queueRestart(in_seconds, full_restart, optional - message)
+
+Runs the queue restart operation for this Lua API. It uses in_seconds, full_restart, optional message.
+
+```lua
+queueRestart(10, 0, "Hello!")
+```
+
+LuaDB:query(query)
+
+Runs a SQL query against this Lua database handle and returns result data when available.
+
+```lua
+db:query("SELECT * FROM users")
+```
+
+---
+
+R
+
+registerLuaPlaymod()
+
+Runs the register lua playmod operation for this Lua API.
+
+```lua
+registerLuaPlaymod()
+```
+
+registerLuaCommand()
+
+Runs the register lua command operation for this Lua API.
+
+```lua
+registerLuaCommand()
+```
+
+registerLuaEvent()
+
+Runs the register lua event operation for this Lua API.
+
+```lua
+registerLuaEvent()
+```
+
+registerLuaDailyEvent()
+
+Runs the register lua daily event operation for this Lua API.
+
+```lua
+registerLuaDailyEvent()
+```
+
+registerLuaAchievement()
+
+Runs the register lua achievement operation for this Lua API.
+
+```lua
+registerLuaAchievement()
+```
+
+registerLuaItem()
+
+Runs the register lua item operation for this Lua API.
+
+```lua
+registerLuaItem()
+```
+
+reloadScripts()
+
+Reloads scripts from disk or server state.
+
+```lua
+reloadScripts()
+```
+
+reloadConfigs()
+
+Reloads configs from disk or server state.
+
+```lua
+reloadConfigs()
+```
+
+reloadItems()
+
+Reloads items from disk or server state.
+
+```lua
+reloadItems()
+```
+
+resetColor(message)
+
+Resets the color for this Lua API. It uses message.
+
+```lua
+resetColor("Hello!")
+```
+
+removeWorldMenuWorld(world_id)
+
+Removes the world menu world from this Lua API. It uses world_id.
+
+```lua
+removeWorldMenuWorld(1)
+```
+
+removeSidebarButton(sidebar_button_name)
+
+Removes the sidebar button from this Lua API. It uses sidebar_button_name.
+
+```lua
+removeSidebarButton("MyButton")
+```
+
+file.read(path)
+
+Runs the read operation for this file utility. It uses path.
+
+```lua
+file.read("interface/myfile.rttex")
+```
+
+bit.rshift(a, optional - b)
+
+Performs a logical right-shift bitwise operation and returns the numeric result. The shift amount is optional and defaults according to the binding.
+
+```lua
+bit.rshift(255, 0)
+```
+
+require(modname)
+
+Loads a Lua module through the sandboxed require implementation.
+
+```lua
+require("my_module")
+```
+
+---
+
+S
+
+savePlayer()
+
+Saves player to persistent storage.
+
+```lua
+savePlayer()
+```
+
+saveWorld()
+
+Saves world to persistent storage.
+
+```lua
+saveWorld()
+```
+
+saveDataToServer(uniqueID)
+
+Saves data to server to persistent storage. It uses uniqueID.
+
+```lua
+saveDataToServer(242)
+```
+
+saveStringToServer(uniqueID, data)
+
+Saves string to server to persistent storage. It uses uniqueID, data.
+
+```lua
+saveStringToServer(242, "actiondata")
+```
+
+setGemEvent(boostGem)
+
+Sets the gem event for this Lua API. It uses boostGem.
+
+```lua
+setGemEvent(2)
+```
+
+setXPEvent(boostXp)
+
+Sets the xpevent for this Lua API. It uses boostXp.
+
+```lua
+setXPEvent(2)
+```
+
+setEvent(event_id)
+
+Sets the event for this Lua API. It uses event_id.
+
+```lua
+setEvent(50)
+```
+
+setDailyEvent(daily_event_id)
+
+Sets the daily event for this Lua API. It uses daily_event_id.
+
+```lua
+setDailyEvent(242)
+```
+
+setBroadcastWorld(worldName)
+
+Sets the broadcast world for this Lua API. It uses worldName.
+
+```lua
+setBroadcastWorld("START")
+```
+
+timer.setTimeout(seconds, callback, optional - args...)
+
+Schedules a callback to run once after the given number of seconds. Any extra arguments are passed to the callback.
+
+```lua
+timer.setTimeout(10, function() end)
+```
+
+timer.setInterval(seconds, callback, optional - args...)
+
+Schedules a callback to repeat every given number of seconds. Any extra arguments are passed to the callback.
+
+```lua
+timer.setInterval(10, function() end)
+```
+
+---
+
+W
+
+worldExists(worldName)
+
+Runs the world exists operation for this Lua API. It uses worldName.
+
+```lua
+worldExists("START")
+```
+
+file.write(path, data)
+
+Runs the write operation for this file utility. It uses path, data.
+
+```lua
+file.write("interface/myfile.rttex", "actiondata")
+```
+
+================================================================================
+FILE: GTPS.Host - Guild.md
+================================================================================
+
+Guild Object API
+
+Last updated: 2026-06-27
+Obtained via getGuild(guild_id), getAllGuilds(), or by resolving world:getGuildID().
+
+---
+
+Quick Navigation
+
+G
+
+14 methods across 1 letter groups.
+
+---
+
+G
+
+Guild:getTitle()
+
+Returns the title for this guild.
+
+```lua
+local title = guild:getTitle()
+print("title:", title)
+```
+
+Guild:getDescription()
+
+Returns the description for this guild.
+
+```lua
+local description = guild:getDescription()
+print("description:", description)
+```
+
+Guild:getNotebook()
+
+Returns the notebook for this guild.
+
+```lua
+local notebook = guild:getNotebook()
+print("notebook:", notebook)
+```
+
+Guild:getID()
+
+Returns the ID for this guild.
+
+```lua
+local iD = guild:getID()
+print("iD:", iD)
+```
+
+Guild:getWorldID()
+
+Returns the world ID for this guild.
+
+```lua
+local worldID = guild:getWorldID()
+print("worldID:", worldID)
+```
+
+Guild:getXP()
+
+Returns the XP for this guild.
+
+```lua
+local xP = guild:getXP()
+print("xP:", xP)
+```
+
+Guild:getLevel()
+
+Returns the level for this guild.
+
+```lua
+local level = guild:getLevel()
+print("level:", level)
+```
+
+Guild:getPoints()
+
+Returns the points for this guild.
+
+```lua
+local points = guild:getPoints()
+print("points:", points)
+```
+
+Guild:getSettings()
+
+Returns the settings for this guild.
+
+```lua
+local settings = guild:getSettings()
+print("settings:", settings)
+```
+
+Guild:getCreatedDate()
+
+Returns the created date for this guild.
+
+```lua
+local createdDate = guild:getCreatedDate()
+print("createdDate:", createdDate)
+```
+
+Guild:getMascotForegroundID()
+
+Returns the mascot foreground ID for this guild.
+
+```lua
+local mascotForegroundID = guild:getMascotForegroundID()
+print("mascotForegroundID:", mascotForegroundID)
+```
+
+Guild:getMascotBackgroundID()
+
+Returns the mascot background ID for this guild.
+
+```lua
+local mascotBackgroundID = guild:getMascotBackgroundID()
+print("mascotBackgroundID:", mascotBackgroundID)
+```
+
+Guild:getDisplayGuildMascot()
+
+Returns the display guild mascot for this guild.
+
+```lua
+local displayGuildMascot = guild:getDisplayGuildMascot()
+print("displayGuildMascot:", displayGuildMascot)
+```
+
+Guild:getOnlinePlayers()
+
+Returns the online players for this guild.
+
+```lua
+local onlinePlayers = guild:getOnlinePlayers()
+print("onlinePlayers:", onlinePlayers)
+```
+
+================================================================================
+FILE: GTPS.Host - IOTM.md
+================================================================================
+
+IOTM Object API
+
+Last updated: 2026-06-27
+Represents the server's current Item Of The Month, returned by getIOTMItem(itemID).
+
+---
+
+Quick Navigation
+
+G · S
+
+3 methods across 2 letter groups.
+
+---
+
+G
+
+IOTM:getID()
+
+Returns the ID for this iotm.
+
+```lua
+local iD = iotm:getID()
+print("iD:", iD)
+```
+
+IOTM:getAmount()
+
+Returns the amount for this iotm.
+
+```lua
+local amount = iotm:getAmount()
+print("amount:", amount)
+```
+
+---
+
+S
+
+IOTM:setAmount(newAmount)
+
+Sets the amount for this iotm. It uses newAmount.
+
+```lua
+iotm:setAmount(1)
+```
+
+================================================================================
+FILE: GTPS.Host - Item.md
+================================================================================
+
+Item Object API
+
+Last updated: 2026-06-27
+Obtained via getItem(itemID) or tile:getTileItem(). Represents one item's static game data.
+
+---
+
+Quick Navigation
+
+A · D · G · I · R · S
+
+50 methods across 6 letter groups.
+
+---
+
+A
+
+Item:addSplicingRecipe()
+
+Adds splicing recipe data or value to this item.
+
+```lua
+item:addSplicingRecipe()
+```
+
+Item:addBreakRecipe()
+
+Adds break recipe data or value to this item.
+
+```lua
+item:addBreakRecipe()
+```
+
+Item:addConsumeRecipe()
+
+Adds consume recipe data or value to this item.
+
+```lua
+item:addConsumeRecipe()
+```
+
+Item:addSacrificeRecipe()
+
+Adds sacrifice recipe data or value to this item.
+
+```lua
+item:addSacrificeRecipe()
+```
+
+Item:addProviderRecipe()
+
+Adds provider recipe data or value to this item.
+
+```lua
+item:addProviderRecipe()
+```
+
+Item:addCombinerRecipe()
+
+Adds combiner recipe data or value to this item.
+
+```lua
+item:addCombinerRecipe()
+```
+
+Item:addBunnyEggRecipe()
+
+Adds bunny egg recipe data or value to this item.
+
+```lua
+item:addBunnyEggRecipe()
+```
+
+---
+
+D
+
+Item:deleteEffects()
+
+Deletes the effects resource.
+
+```lua
+item:deleteEffects()
+```
+
+---
+
+G
+
+Item:getPlaymods()
+
+Returns the playmods for this item.
+
+```lua
+local playmods = item:getPlaymods()
+print("playmods:", playmods)
+```
+
+Item:getName()
+
+Returns the name for this item.
+
+```lua
+local name = item:getName()
+print("name:", name)
+```
+
+Item:getDescription()
+
+Returns the description for this item.
+
+```lua
+local description = item:getDescription()
+print("description:", description)
+```
+
+Item:getID()
+
+Returns the ID for this item.
+
+```lua
+local iD = item:getID()
+print("iD:", iD)
+```
+
+Item:getPrice()
+
+Returns the price for this item.
+
+```lua
+local price = item:getPrice()
+print("price:", price)
+```
+
+Item:getInfo()
+
+Returns the info for this item.
+
+```lua
+local info = item:getInfo()
+print("info:", info)
+```
+
+Item:getActionType()
+
+Returns the action type for this item.
+
+```lua
+local actionType = item:getActionType()
+print("actionType:", actionType)
+```
+
+Item:getRarity()
+
+Returns the rarity for this item.
+
+```lua
+local rarity = item:getRarity()
+print("rarity:", rarity)
+```
+
+Item:getGems(optional - world, optional - player)
+
+Returns the gems for this item.
+
+```lua
+local gems = item:getGems(world, player)
+print("gems:", gems)
+```
+
+Item:getXP(optional - world, optional - player)
+
+Returns the XP for this item.
+
+```lua
+local xP = item:getXP(world, player)
+print("xP:", xP)
+```
+
+Item:getGrowTime()
+
+Returns the grow time for this item.
+
+```lua
+local growTime = item:getGrowTime()
+print("growTime:", growTime)
+```
+
+Item:getCategoryType()
+
+Returns the category type for this item.
+
+```lua
+local categoryType = item:getCategoryType()
+print("categoryType:", categoryType)
+```
+
+Item:getEditableType()
+
+Returns the editable type for this item.
+
+```lua
+local editableType = item:getEditableType()
+print("editableType:", editableType)
+```
+
+Item:getTexture()
+
+Returns the texture for this item.
+
+```lua
+local texture = item:getTexture()
+print("texture:", texture)
+```
+
+Item:getTextureHash()
+
+Returns the texture hash for this item.
+
+```lua
+local textureHash = item:getTextureHash()
+print("textureHash:", textureHash)
+```
+
+Item:getTextureX()
+
+Returns the texture x for this item.
+
+```lua
+local textureX = item:getTextureX()
+print("textureX:", textureX)
+```
+
+Item:getTextureY()
+
+Returns the texture y for this item.
+
+```lua
+local textureY = item:getTextureY()
+print("textureY:", textureY)
+```
+
+Item:getClothingType()
+
+Returns the clothing type for this item.
+
+```lua
+local clothingType = item:getClothingType()
+print("clothingType:", clothingType)
+```
+
+Item:getPricedRarity()
+
+Returns the priced rarity for this item.
+
+```lua
+local pricedRarity = item:getPricedRarity()
+print("pricedRarity:", pricedRarity)
+```
+
+Item:getEffects()
+
+Returns the effects for this item.
+
+```lua
+local effects = item:getEffects()
+print("effects:", effects)
+```
+
+Item:getObtainability()
+
+Returns the obtainability for this item.
+
+```lua
+local obtainability = item:getObtainability()
+print("obtainability:", obtainability)
+```
+
+Item:getMachineCap()
+
+Returns the machine cap for this item.
+
+```lua
+local machineCap = item:getMachineCap()
+print("machineCap:", machineCap)
+```
+
+Item:getFarmability()
+
+Returns the farmability for this item.
+
+```lua
+local farmability = item:getFarmability()
+print("farmability:", farmability)
+```
+
+Item:getMaxFruitDropCount()
+
+Returns the max fruit drop count for this item.
+
+```lua
+local maxFruitDropCount = item:getMaxFruitDropCount()
+print("maxFruitDropCount:", maxFruitDropCount)
+```
+
+Item:getMinFruitDropCount()
+
+Returns the min fruit drop count for this item.
+
+```lua
+local minFruitDropCount = item:getMinFruitDropCount()
+print("minFruitDropCount:", minFruitDropCount)
+```
+
+---
+
+I
+
+Item:isObtainable()
+
+Checks whether this item is obtainable.
+
+```lua
+if item:isObtainable() then
+    print("Condition met")
+end
+```
+
+---
+
+R
+
+Item:removeMachineCap()
+
+Removes the machine cap from this item.
+
+```lua
+item:removeMachineCap()
+```
+
+---
+
+S
+
+Item:setName(value)
+
+Sets the name for this item. It uses value.
+
+```lua
+item:setName(1)
+```
+
+Item:setPrice(newPrice)
+
+Sets the price for this item. It uses newPrice.
+
+```lua
+item:setPrice(1000)
+```
+
+Item:setCategoryType(value)
+
+Sets the category type for this item. It uses value.
+
+```lua
+item:setCategoryType(1)
+```
+
+Item:setEditableType(value)
+
+Sets the editable type for this item. It uses value.
+
+```lua
+item:setEditableType(1)
+```
+
+Item:setGrowTime(value)
+
+Sets the grow time for this item. It uses value.
+
+```lua
+item:setGrowTime(1)
+```
+
+Item:setActionType(value)
+
+Sets the action type for this item. It uses value.
+
+```lua
+item:setActionType(1)
+```
+
+Item:setDescription(value)
+
+Sets the description for this item. It uses value.
+
+```lua
+item:setDescription(1)
+```
+
+Item:setTextureHash(hash)
+
+Sets the texture hash for this item. It uses hash.
+
+```lua
+item:setTextureHash("abc123")
+```
+
+Item:setTexture(value)
+
+Sets the texture for this item. It uses value.
+
+```lua
+item:setTexture(1)
+```
+
+Item:setTextureX(x)
+
+Sets the texture x for this item. It uses x.
+
+```lua
+item:setTextureX(10)
+```
+
+Item:setTextureY(y)
+
+Sets the texture y for this item. It uses y.
+
+```lua
+item:setTextureY(10)
+```
+
+Item:setClothingType(value)
+
+Sets the clothing type for this item. It uses value.
+
+```lua
+item:setClothingType(1)
+```
+
+Item:setEffects()
+
+Sets the effects for this item.
+
+```lua
+item:setEffects()
+```
+
+Item:setMachineCap(value)
+
+Sets the machine cap for this item. It uses value.
+
+```lua
+item:setMachineCap(1)
+```
+
+Item:setFarmability(value)
+
+Sets the farmability for this item. It uses value.
+
+```lua
+item:setFarmability(1)
+```
+
+================================================================================
+FILE: GTPS.Host - RenderTexture.md
+================================================================================
+
+RenderTexture Object API
+
+Last updated: 2026-06-27
+An off-screen drawable surface, created with RenderTexture:new(height).
+
+---
+
+Quick Navigation
+
+C · D · G · N · S
+
+9 methods across 5 letter groups.
+
+---
+
+C
+
+RenderTexture:clear(r, g, b, a)
+
+Runs the clear operation for this render texture. It uses r, g, b, a.
+
+```lua
+renderTexture:clear(255, 0, 0, 255)
+```
+
+---
+
+D
+
+RenderTexture:draw()
+
+Runs the draw operation for this render texture.
+
+```lua
+renderTexture:draw()
+```
+
+RenderTexture:display()
+
+Runs the display operation for this render texture.
+
+```lua
+renderTexture:display()
+```
+
+RenderTexture:drawText(str, x, y, size, r, g, b, a)
+
+Runs the draw text operation for this render texture. It uses str, x, y, size, r, g, b, a.
+
+```lua
+renderTexture:drawText("Hello!", 10, 10, 12, 255, 0, 0, 255)
+```
+
+---
+
+G
+
+RenderTexture:getWidth()
+
+Returns the width for this render texture.
+
+```lua
+local width = renderTexture:getWidth()
+print("width:", width)
+```
+
+RenderTexture:getHeight()
+
+Returns the height for this render texture.
+
+```lua
+local height = renderTexture:getHeight()
+print("height:", height)
+```
+
+RenderTexture:getTextSize(str, size)
+
+Returns the text size for this render texture.
+
+```lua
+local textSize = renderTexture:getTextSize("Hello!", 12)
+print("textSize:", textSize)
+```
+
+---
+
+N
+
+RenderTexture:new(height)
+
+Runs the new operation for this render texture. It uses height.
+
+```lua
+renderTexture:new(150)
+```
+
+---
+
+S
+
+RenderTexture:saveToFile(path)
+
+Saves to file to persistent storage. It uses path.
+
+```lua
+renderTexture:saveToFile("interface/myfile.rttex")
+```
+
+================================================================================
+FILE: GTPS.Host - ShopItem.md
+================================================================================
+
+ShopItem Object API
+
+Last updated: 2026-06-27
+An entry from the in-game store, returned by getStoreItems().
+
+---
+
+Quick Navigation
+
+G · I · M
+
+17 methods across 3 letter groups.
+
+---
+
+G
+
+ShopItem:getCategory()
+
+Returns the category for this shop item.
+
+```lua
+local category = shopItem:getCategory()
+print("category:", category)
+```
+
+ShopItem:getTexture()
+
+Returns the texture for this shop item.
+
+```lua
+local texture = shopItem:getTexture()
+print("texture:", texture)
+```
+
+ShopItem:getTexturePosX()
+
+Returns the texture pos x for this shop item.
+
+```lua
+local texturePosX = shopItem:getTexturePosX()
+print("texturePosX:", texturePosX)
+```
+
+ShopItem:getTexturePosY()
+
+Returns the texture pos y for this shop item.
+
+```lua
+local texturePosY = shopItem:getTexturePosY()
+print("texturePosY:", texturePosY)
+```
+
+ShopItem:getItemID()
+
+Returns the item ID for this shop item.
+
+```lua
+local itemID = shopItem:getItemID()
+print("itemID:", itemID)
+```
+
+ShopItem:getTitle()
+
+Returns the title for this shop item.
+
+```lua
+local title = shopItem:getTitle()
+print("title:", title)
+```
+
+ShopItem:getDescription()
+
+Returns the description for this shop item.
+
+```lua
+local description = shopItem:getDescription()
+print("description:", description)
+```
+
+ShopItem:getPrice()
+
+Returns the price for this shop item.
+
+```lua
+local price = shopItem:getPrice()
+print("price:", price)
+```
+
+ShopItem:getRequiredEvent()
+
+Returns the required event for this shop item.
+
+```lua
+local requiredEvent = shopItem:getRequiredEvent()
+print("requiredEvent:", requiredEvent)
+```
+
+ShopItem:getItemsDescription()
+
+Returns the items description for this shop item.
+
+```lua
+local itemsDescription = shopItem:getItemsDescription()
+print("itemsDescription:", itemsDescription)
+```
+
+ShopItem:getItems()
+
+Returns the items for this shop item.
+
+```lua
+local items = shopItem:getItems()
+print("items:", items)
+```
+
+ShopItem:getRollAmount()
+
+Returns the roll amount for this shop item.
+
+```lua
+local rollAmount = shopItem:getRollAmount()
+print("rollAmount:", rollAmount)
+```
+
+---
+
+I
+
+ShopItem:isRPC()
+
+Checks whether this shop item is rpc.
+
+```lua
+if shopItem:isRPC() then
+    print("Condition met")
+end
+```
+
+ShopItem:isGrowtoken()
+
+Checks whether this shop item is growtoken.
+
+```lua
+if shopItem:isGrowtoken() then
+    print("Condition met")
+end
+```
+
+ShopItem:isVoucher()
+
+Checks whether this shop item is voucher.
+
+```lua
+if shopItem:isVoucher() then
+    print("Condition met")
+end
+```
+
+ShopItem:isRandom()
+
+Checks whether this shop item is random.
+
+```lua
+if shopItem:isRandom() then
+    print("Condition met")
+end
+```
+
+---
+
+M
+
+ShopItem:makePurchaseItems(Count)
+
+Runs the make purchase items operation for this shop item. It uses Count.
+
+```lua
+shopItem:makePurchaseItems(1)
+```
+
+================================================================================
+FILE: GTPS.Host - Sprite.md
+================================================================================
+
+Sprite Object API
+
+Last updated: 2026-06-27
+A drawable sprite, created with Sprite:new() and rendered onto a RenderTexture.
+
+---
+
+Quick Navigation
+
+N · S
+
+5 methods across 2 letter groups.
+
+---
+
+N
+
+Sprite:new()
+
+Runs the new operation for this sprite.
+
+```lua
+sprite:new()
+```
+
+---
+
+S
+
+Sprite:setScale(x, y)
+
+Sets the scale for this sprite. It uses x, y.
+
+```lua
+sprite:setScale(10, 10)
+```
+
+Sprite:setPosition(x, y)
+
+Sets the position for this sprite. It uses x, y.
+
+```lua
+sprite:setPosition(10, 10)
+```
+
+Sprite:setRect(x, y, width, height)
+
+Sets the rect for this sprite. It uses x, y, width, height.
+
+```lua
+sprite:setRect(10, 10, 200, 150)
+```
+
+Sprite:setTexture()
+
+Sets the texture for this sprite.
+
+```lua
+sprite:setTexture()
+```
+
+================================================================================
+FILE: GTPS.Host - Tile.md
+================================================================================
+
+Tile Object API
+
+Last updated: 2026-06-27
+Obtained via world:getTile(x, y) or world:getTiles(). Represents a single block/tile in a world.
+
+---
+
+Quick Navigation
+
+G · S
+
+13 methods across 2 letter groups.
+
+---
+
+G
+
+Tile:getTileID()
+
+Returns the tile ID for this tile.
+
+```lua
+local tileID = tile:getTileID()
+print("tileID:", tileID)
+```
+
+Tile:getTileItem()
+
+Returns the tile item for this tile.
+
+```lua
+local tileItem = tile:getTileItem()
+print("tileItem:", tileItem)
+```
+
+Tile:getLastPunched()
+
+Returns the last punched for this tile.
+
+```lua
+local lastPunched = tile:getLastPunched()
+print("lastPunched:", lastPunched)
+```
+
+Tile:getPosX()
+
+Returns the pos x for this tile.
+
+```lua
+local posX = tile:getPosX()
+print("posX:", posX)
+```
+
+Tile:getPosY()
+
+Returns the pos y for this tile.
+
+```lua
+local posY = tile:getPosY()
+print("posY:", posY)
+```
+
+Tile:getNote()
+
+Returns the note for this tile.
+
+```lua
+local note = tile:getNote()
+print("note:", note)
+```
+
+Tile:getTileForeground()
+
+Returns the tile foreground for this tile.
+
+```lua
+local tileForeground = tile:getTileForeground()
+print("tileForeground:", tileForeground)
+```
+
+Tile:getTileBackground()
+
+Returns the tile background for this tile.
+
+```lua
+local tileBackground = tile:getTileBackground()
+print("tileBackground:", tileBackground)
+```
+
+Tile:getTileData(data_type)
+
+Returns the tile data for this tile.
+
+```lua
+local tileData = tile:getTileData(1)
+print("tileData:", tileData)
+```
+
+Tile:getFlags()
+
+Returns the flags for this tile.
+
+```lua
+local flags = tile:getFlags()
+print("flags:", flags)
+```
+
+---
+
+S
+
+Tile:setTileData(data_type, data_value)
+
+Sets the tile data for this tile. It uses data_type, data_value.
+
+```lua
+tile:setTileData(1, 1)
+```
+
+Tile:setTileDataInt(data_type, data_value)
+
+Sets the tile data int for this tile. It uses data_type, data_value.
+
+```lua
+tile:setTileDataInt(1, 1)
+```
+
+Tile:setFlags(flags)
+
+Sets the flags for this tile. It uses flags.
+
+```lua
+tile:setFlags(0)
+```
+
+================================================================================
+FILE: GTPS.Host - World.md
+================================================================================
+
+World Object API
+
+Last updated: 2026-06-27
+Obtained via player:getWorld(), getWorld(id), getWorldByName(name), or getServerWorlds().
+
+---
+
+Quick Navigation
+
+A · C · D · F · G · H · I · K · N · O · P · R · S · U
+
+82 methods across 14 letter groups.
+
+---
+
+A
+
+World:addPunishment(player, type, duration, reason, invoker_id)
+
+Adds punishment data or value to this world. It uses player, type, duration, reason, invoker_id.
+
+```lua
+world:addPunishment(player, 1, 3600, "Reason here", 242)
+```
+
+World:adjustGems(player, tile, gemsCount, noParticles)
+
+Adjusts gems collected from a tile for the specified player.
+
+```lua
+world:adjustGems(player, tile, 50, 0)
+```
+
+World:addXP(player, xp_amount)
+
+Adds XP data or value to this world. It uses player, xp_amount.
+
+```lua
+world:addXP(player, 1)
+```
+
+World:addTileAccess(player, tile)
+
+Adds tile access data or value to this world. It uses player, tile.
+
+```lua
+world:addTileAccess(player, tile)
+```
+
+World:addAccess(player, admin_type)
+
+Adds access data or value to this world. It uses player, admin_type.
+
+```lua
+world:addAccess(player, 1)
+```
+
+World:addFlag(flag)
+
+Adds flag data or value to this world. It uses flag.
+
+```lua
+world:addFlag(TILE_FLAG_IS_ON)
+```
+
+---
+
+C
+
+World:createNPC(name, x, y)
+
+Creates the NPC resource or entry. It uses name, x, y.
+
+```lua
+world:createNPC("MyName", 10, 10)
+```
+
+---
+
+D
+
+World:deleteEffects()
+
+Deletes the effects resource.
+
+```lua
+world:deleteEffects()
+```
+
+World:delete()
+
+Runs the delete operation for this world.
+
+```lua
+world:delete()
+```
+
+---
+
+F
+
+World:findNPCByName(name)
+
+Runs the find npcby name operation for this world. It uses name.
+
+```lua
+world:findNPCByName("MyName")
+```
+
+World:findPathByTile(tile_1, tile_2, max_rad_x, max_rad_y)
+
+Runs the find path by tile operation for this world. It uses tile_1, tile_2, max_rad_x, max_rad_y.
+
+```lua
+world:findPathByTile(tile, tile, 1, 1)
+```
+
+---
+
+G
+
+World:getName()
+
+Returns the name for this world.
+
+```lua
+local name = world:getName()
+print("name:", name)
+```
+
+World:getOwner()
+
+Returns the owner for this world.
+
+```lua
+local owner = world:getOwner()
+print("owner:", owner)
+```
+
+World:getPunishment(player, type)
+
+Returns the punishment for this world.
+
+```lua
+local punishment = world:getPunishment(player, 1)
+print("punishment:", punishment)
+```
+
+World:getAllPunishments()
+
+Returns the all punishments for this world.
+
+```lua
+local allPunishments = world:getAllPunishments()
+print("allPunishments:", allPunishments)
+```
+
+World:getID()
+
+Returns the ID for this world.
+
+```lua
+local iD = world:getID()
+print("iD:", iD)
+```
+
+World:getTile(x, y)
+
+Returns the tile for this world.
+
+```lua
+local tile = world:getTile(10, 10)
+print("tile:", tile)
+```
+
+World:getPlayers()
+
+Returns the players for this world.
+
+```lua
+local players = world:getPlayers()
+print("players:", players)
+```
+
+World:getPlayersCount(optional - show_all)
+
+Returns the players count for this world.
+
+```lua
+local playersCount = world:getPlayersCount(1)
+print("playersCount:", playersCount)
+```
+
+World:getVisiblePlayersCount()
+
+Returns the visible players count for this world.
+
+```lua
+local visiblePlayersCount = world:getVisiblePlayersCount()
+print("visiblePlayersCount:", visiblePlayersCount)
+```
+
+World:getWorldSizeX()
+
+Returns the world size x for this world.
+
+```lua
+local worldSizeX = world:getWorldSizeX()
+print("worldSizeX:", worldSizeX)
+```
+
+World:getWorldSizeY()
+
+Returns the world size y for this world.
+
+```lua
+local worldSizeY = world:getWorldSizeY()
+print("worldSizeY:", worldSizeY)
+```
+
+World:getWorldType()
+
+Returns the world type for this world.
+
+```lua
+local worldType = world:getWorldType()
+print("worldType:", worldType)
+```
+
+World:getTiles()
+
+Returns the tiles for this world.
+
+```lua
+local tiles = world:getTiles()
+print("tiles:", tiles)
+```
+
+World:getEmptyTiles()
+
+Returns the empty tiles for this world.
+
+```lua
+local emptyTiles = world:getEmptyTiles()
+print("emptyTiles:", emptyTiles)
+```
+
+World:getNoCollisionTiles()
+
+Returns the no collision tiles for this world.
+
+```lua
+local noCollisionTiles = world:getNoCollisionTiles()
+print("noCollisionTiles:", noCollisionTiles)
+```
+
+World:getDroppedItems()
+
+Returns the dropped items for this world.
+
+```lua
+local droppedItems = world:getDroppedItems()
+print("droppedItems:", droppedItems)
+```
+
+World:getTileDroppedItems(tile)
+
+Returns the tile dropped items for this world.
+
+```lua
+local tileDroppedItems = world:getTileDroppedItems(tile)
+print("tileDroppedItems:", tileDroppedItems)
+```
+
+World:getAllNPC()
+
+Returns the all NPC for this world.
+
+```lua
+local allNPC = world:getAllNPC()
+print("allNPC:", allNPC)
+```
+
+World:getWorldLock()
+
+Returns the world lock for this world.
+
+```lua
+local worldLock = world:getWorldLock()
+print("worldLock:", worldLock)
+```
+
+World:getMagplantRemoteTile(player)
+
+Returns the magplant remote tile for this world.
+
+```lua
+local magplantRemoteTile = world:getMagplantRemoteTile(player)
+print("magplantRemoteTile:", magplantRemoteTile)
+```
+
+World:getGuildID()
+
+Returns the guild ID for this world.
+
+```lua
+local guildID = world:getGuildID()
+print("guildID:", guildID)
+```
+
+World:getMachineCap(item_id)
+
+Returns the machine cap for this world.
+
+```lua
+local machineCap = world:getMachineCap(242)
+print("machineCap:", machineCap)
+```
+
+World:getMachineCaps()
+
+Returns the machine caps for this world.
+
+```lua
+local machineCaps = world:getMachineCaps()
+print("machineCaps:", machineCaps)
+```
+
+World:getEffects()
+
+Returns the effects for this world.
+
+```lua
+local effects = world:getEffects()
+print("effects:", effects)
+```
+
+World:getCached(item_id)
+
+Returns the cached for this world.
+
+```lua
+local cached = world:getCached(242)
+print("cached:", cached)
+```
+
+---
+
+H
+
+World:hasTileAccess(player, tile)
+
+Checks whether the player has access to the specified tile.
+
+```lua
+if world:hasTileAccess(player, tile) then
+    print("Condition met")
+end
+```
+
+World:hasAccess(player)
+
+Checks whether the player has world-level access.
+
+```lua
+if world:hasAccess(player) then
+    print("Condition met")
+end
+```
+
+World:hasFlag(flag)
+
+Checks whether this world has flag. It uses flag.
+
+```lua
+if world:hasFlag(TILE_FLAG_IS_ON) then
+    print("Condition met")
+end
+```
+
+---
+
+I
+
+World:isGameActive()
+
+Checks whether this world is game active.
+
+```lua
+if world:isGameActive() then
+    print("Condition met")
+end
+```
+
+World:isNuked()
+
+Checks whether this world is nuked.
+
+```lua
+if world:isNuked() then
+    print("Condition met")
+end
+```
+
+---
+
+K
+
+World:kill(player, optional - force_respawn_on_white_door)
+
+Kills the player in this world and optionally forces respawn on the white door.
+
+```lua
+world:kill(player, 1)
+```
+
+---
+
+N
+
+World:nuke(ownerBanTime, adminsBanTime, everyoneElseBanTime)
+
+Runs the nuke operation for this world. It uses ownerBanTime, adminsBanTime, everyoneElseBanTime.
+
+```lua
+world:nuke(1, 1, 1)
+```
+
+World:new(sizeX, sizeY, worldType)
+
+Creates a new world using the requested size and world type.
+
+```lua
+world:new(1, 1, 1)
+```
+
+World:newFromTemplate(templateArg)
+
+Creates a new world from an existing template argument.
+
+```lua
+world:newFromTemplate(1)
+```
+
+---
+
+O
+
+World:onLoot(player, tile, gemsCount)
+
+Runs the world loot handling logic for a player and tile.
+
+```lua
+world:onLoot(player, tile, 50)
+```
+
+World:onGameWinHighestScore()
+
+Triggers the game win highest score behavior for this world.
+
+```lua
+world:onGameWinHighestScore()
+```
+
+World:onCreateChatBubble(posX, posY, message, persistMessage)
+
+Triggers the create chat bubble behavior for this world. It uses posX, posY, message, persistMessage.
+
+```lua
+world:onCreateChatBubble(10, 10, "Hello!", "persistMessage")
+```
+
+World:onCreateExplosion(posX, posY, radius, power)
+
+Triggers the create explosion behavior for this world. It uses posX, posY, radius, power.
+
+```lua
+world:onCreateExplosion(10, 10, 5, 2)
+```
+
+---
+
+P
+
+World:punchTile(tile, optional - player)
+
+Runs the punch tile operation for this world. It uses tile, optional player.
+
+```lua
+world:punchTile(tile, player)
+```
+
+World:placeTile(tile, id, optional - player)
+
+Runs the place tile operation for this world. It uses tile, id, optional player.
+
+```lua
+world:placeTile(tile, 242, player)
+```
+
+---
+
+R
+
+World:removeOwner()
+
+Removes the owner from this world.
+
+```lua
+world:removeOwner()
+```
+
+World:removePunishment(player, type)
+
+Removes the punishment from this world. It uses player, type.
+
+```lua
+world:removePunishment(player, 1)
+```
+
+World:removeDroppedItem(uid)
+
+Removes the dropped item from this world. It uses uid.
+
+```lua
+world:removeDroppedItem(242)
+```
+
+World:removeDroppedItemsByID(id)
+
+Removes the dropped items by ID from this world. It uses id.
+
+```lua
+world:removeDroppedItemsByID(242)
+```
+
+World:removeAllDroppedItems()
+
+Removes the all dropped items from this world.
+
+```lua
+world:removeAllDroppedItems()
+```
+
+World:removeTileAccess(player, tile)
+
+Removes the tile access from this world. It uses player, tile.
+
+```lua
+world:removeTileAccess(player, tile)
+```
+
+World:removeAllTileAccess()
+
+Removes the all tile access from this world.
+
+```lua
+world:removeAllTileAccess()
+```
+
+World:removeAccess(player)
+
+Removes the access from this world. It uses player.
+
+```lua
+world:removeAccess(player)
+```
+
+World:removeNPC(player)
+
+Removes the NPC from this world. It uses player.
+
+```lua
+world:removeNPC(player)
+```
+
+World:redeemCode(player, code)
+
+Redeems the code for this world. It uses player, code.
+
+```lua
+world:redeemCode(player, "mycode")
+```
+
+World:removeNuke(unbanBannedUsers)
+
+Removes the nuke from this world. It uses unbanBannedUsers.
+
+```lua
+world:removeNuke(1)
+```
+
+World:removeMachineCap(item_id)
+
+Removes the machine cap from this world. It uses item_id.
+
+```lua
+world:removeMachineCap(242)
+```
+
+---
+
+S
+
+World:setOwner(user_id)
+
+Sets the owner for this world. It uses user_id.
+
+```lua
+world:setOwner(0)
+```
+
+World:spawnItem(x, y, itemID, itemCount, optional - center_item)
+
+Spawns an item drop at the provided world coordinates.
+
+```lua
+world:spawnItem(10, 10, 242, 1, 1)
+```
+
+World:spawnGems(x, y, gemsCount, optional - player)
+
+Spawns gem drops at the provided world coordinates, optionally attributed to a player.
+
+```lua
+world:spawnGems(10, 10, 50, player)
+```
+
+World:setTileForeground(tile, id, optional - visual_update, optional - player)
+
+Sets the tile foreground for this world. It uses tile, id, optional visual_update, optional player.
+
+```lua
+world:setTileForeground(tile, 242, 1, player)
+```
+
+World:setTileBackground(tile, id, optional - visual_update, optional - player)
+
+Sets the tile background for this world. It uses tile, id, optional visual_update, optional player.
+
+```lua
+world:setTileBackground(tile, 242, 1, player)
+```
+
+World:setPlayerPosition(player, x, y, optional - no_packet)
+
+Sets the player position for this world. It uses player, x, y, optional no_packet.
+
+```lua
+world:setPlayerPosition(player, 10, 10, 1)
+```
+
+World:sendPlayerMessage(player, message)
+
+Sends the player message to the target client or service. It uses player, message.
+
+```lua
+world:sendPlayerMessage(player, "Hello!")
+```
+
+World:setClothing(player, item_id)
+
+Sets the clothing for this world. It uses player, item_id.
+
+```lua
+world:setClothing(player, 242)
+```
+
+World:setWeather(weatherID)
+
+Sets the weather for this world. It uses weatherID.
+
+```lua
+world:setWeather(242)
+```
+
+World:setMagplantRemoteTile(player, tile)
+
+Sets the magplant remote tile for this world. It uses player, tile.
+
+```lua
+world:setMagplantRemoteTile(player, tile)
+```
+
+World:spawnGhost(tile, id, sb, wd, sp)
+
+Spawns ghost in the relevant game context. It uses tile, id, sb, wd, sp.
+
+```lua
+world:spawnGhost(tile, 242, 1, 1, 1)
+```
+
+World:setMachineCap(item_id, item_count)
+
+Sets the machine cap for this world. It uses item_id, item_count.
+
+```lua
+world:setMachineCap(242, 1)
+```
+
+World:setEffects()
+
+Sets the effects for this world.
+
+```lua
+world:setEffects()
+```
+
+World:save()
+
+Runs the save operation for this world.
+
+```lua
+world:save()
+```
+
+---
+
+U
+
+World:useItemEffect(netID, itemID, secondNetID, effectDelay)
+
+Runs the use item effect operation for this world. It uses netID, itemID, secondNetID, effectDelay.
+
+```lua
+world:useItemEffect(242, 242, 242, 500)
+```
+
+World:useItemTileEffect(tile, netID, itemID, reverse, effectDelay)
+
+Runs the use item tile effect operation for this world. It uses tile, netID, itemID, reverse, effectDelay.
+
+```lua
+world:useItemTileEffect(tile, 242, 242, 1, 500)
+```
+
+World:updateClothing(player)
+
+Updates the clothing for this world. It uses player.
+
+```lua
+world:updateClothing(player)
+```
+
+World:updateTile(tile, optional - player)
+
+Updates the tile for this world. It uses tile, optional player.
+
+```lua
+world:updateTile(tile, player)
+```
+
+World:useConsumable(player, tile, id, optional - noCallback)
+
+Uses a consumable item for a player on a tile, optionally skipping callback execution.
+
+```lua
+world:useConsumable(player, tile, 242, 0)
+```
+
+================================================================================
+END OF COMBINED FILE
+================================================================================
+
+```
